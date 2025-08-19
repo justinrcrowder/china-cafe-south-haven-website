@@ -1,0 +1,750 @@
+{
+  "restaurant_name": "CHINA CAFE",
+  "address": "319 Broadway, South Haven, MI 49090",
+  "phone": "(269) 637-8591",
+  "hours": {
+    "tue_thru_fri": "11:00 AM - 8:00 PM",
+    "sat_thru_sun": "12:00 PM - 8:00 PM",
+    "mon": "CLOSED"
+  },
+  "take_out_menu_note": "Mandarin, Szechuan, Hunan, Cantonese Cuisine",
+  "notes": [
+    "Hot & Spicy (Can be order mild!)",
+    "We will prepare your favorite dish upon request!"
+  ],
+  "lunch_menu": {
+    "available_time": "From 11:00 AM to 3:30 PM",
+    "served_with": "Steamed Rice, Pork Fried Rice (or Brown Rice add $1.00), Spring Roll",
+    "items": [
+      {
+        "name": "Chicken with Mixed Vegetables",
+        "price": 9.75
+      },
+      {
+        "name": "Moo Goo Gai Pan",
+        "price": 9.75
+      },
+      {
+        "name": "Mushroom Chicken",
+        "price": 9.75
+      },
+      {
+        "name": "Curry Chicken (Hot)",
+        "price": 9.75
+      },
+      {
+        "name": "Chicken with Broccoli",
+        "price": 9.75
+      },
+      {
+        "name": "Pepper Steak",
+        "price": 9.75
+      },
+      {
+        "name": "Beef with Broccoli",
+        "price": 9.75
+      },
+      {
+        "name": "Shrimp with Broccoli",
+        "price": 9.75
+      },
+      {
+        "name": "Shrimp with Lobster Sauce",
+        "price": 9.75
+      },
+      {
+        "name": "Sweet & Sour Chicken",
+        "price": 9.75
+      },
+      {
+        "name": "Sweet & Sour Pork",
+        "price": 9.75
+      },
+      {
+        "name": "Roast Pork Lo Mein",
+        "price": 9.75
+      },
+      {
+        "name": "House Lo Mein",
+        "price": 9.75
+      }
+    ]
+  },
+  "weight_watchers_menu": {
+    "note": "Served w/ Steamed Rice, Sugar-Free Sauce or Garlic Sauce (All steamed with no oil, no salt)",
+    "items": [
+      {
+        "name": "WW1. Steamed Vegetables Combo",
+        "price": 12.50
+      },
+      {
+        "name": "WW2. Scallop with Broccoli",
+        "price": 13.95
+      },
+      {
+        "name": "WW3. Shrimp with Broccoli",
+        "price": 12.50
+      },
+      {
+        "name": "WW4. Chicken with Broccoli",
+        "price": 12.50
+      }
+    ]
+  },
+  "appetizers": [
+    {
+      "name": "Egg Roll (1) or Vegetable Egg Roll (1)",
+      "price": 1.80
+    },
+    {
+        "name": "Bobo Combination Appetizers (for 2)",
+        "price": 13.95,
+        "description": "Egg rolls, BBQ Pork, Crab Meat Rangoon, Fried Shrimp, Teriyaki Beef"
+    },
+    {
+      "name": "Fried Shrimp (6)",
+      "price": 7.95
+    },
+    {
+      "name": "Crab Meat Rangoon (8)",
+      "price": 6.95
+    },
+    {
+        "name":"Bar-B-Q Pork",
+        "price": 7.95
+    },
+    {
+      "name": "Teriyaki Beef (4)",
+      "price": 6.95
+    },
+    {
+      "name": "Fried Crab Stick (6)",
+      "price": 6.25
+    },
+    {
+      "name": "Pot Stickers (4)",
+      "price": 5.50
+    },
+    {
+      "name": "Fried Wonton (12)",
+      "price": 4.00
+    },
+    {
+      "name": "Chicken on Stick (4)",
+      "price": 6.25
+    },
+    {
+      "name": "Sugar Donuts (10)",
+      "price": 5.25
+    },
+    {
+      "name": "Spring Rolls (3)",
+      "price": 3.60
+    },
+    {
+      "name": "Fried Chicken Wings (6)",
+      "price": 7.95
+    }
+  ],
+  "soups": [
+    {
+      "name": "Chicken Noodle Soup",
+      "price": 4.25
+    },
+    {
+      "name": "Hot & Sour Soup (Hot)",
+      "price": 4.25
+    },
+    {
+      "name": "Wonton Soup",
+      "price": 4.25
+    },
+    {
+      "name": "Egg Drop Soup",
+      "price": 4.25,
+      "gf": true
+    },
+    {
+      "name": "Vegetable Soup",
+      "price": 4.25,
+      "gf": true
+    },
+    {
+      "name": "Sizzling Rice Soup (for 2)",
+      "price": 8.95,
+      "description": "Shrimp, Chicken, Pea Pods, Mushroom, Sizzling Rice",
+      "gf": true
+    }
+  ],
+  "chef_s_specialties": [
+    {"note": "served with rice"},
+    {
+    "name": "Happy Family",
+    "description": "A combination of tender beef, shrimp, pork, chicken and Chinese vegetables stir fried in our special brown sauce and white sauce.",
+    "price": 15.95
+    },
+    {
+      "name": "Triple Delights (Hot!)",
+      "description": "Combination of scallop, shrimp, chicken and peanuts, and vegetables stirfried in a chili brown sauce.",
+      "price": 15.95
+    },
+    {
+      "name": "Seafood Deluxe",
+      "description": "Shrimp, scallop, crab sticks sauteed with vegetables in the Chef's special sauce.",
+      "gf": true,
+      "price": 15.95
+    },
+    {
+        "name": "Shanghai Shrimp",
+        "price": 15.95,
+        "description": "Jumbo shrimp lightly coated with special spices served with crispy rice noodle."
+    },
+    {
+      "name": "Sesame Chicken",
+      "price": 13.50,
+      "description": "A proved winner, honey glazed chunked chicken is cooked to perfection with sesame seed."
+    },
+    {
+      "name": "Governor's Chicken (Hot!)",
+      "price": 13.50,
+      "description": "Boneless chicken chunks sautéed with bell peppers and a special tangy brown sauce."
+    },
+    {
+      "name": "Orange Chicken (Hot)",
+      "price": 13.50,
+      "description": "Tender chicken, cooked with tangerine peel, and enhanced by a tangy brown sauce. Tender and crispy!"
+    },
+    {
+      "name": "Chef's Special",
+      "price": 15.95,
+      "description": "BBQ pork, chicken, shrimp, scallops with pea pods, water, chestnuts, bamboo shoots, mushrooms, and Chinese vegetables."
+    },
+    {
+      "name": "Sizzling Seafood Platter",
+      "price": 16.95,
+      "gf": true,
+      "description": "Scallop, shrimp, crab stick, cooked with Chinese vegetables and sizzling rice in a white sauce."
+    },
+    {
+      "name": "Sizzling Delight Platter",
+      "price": 16.95,
+      "description": "Scallop, chicken, barbecue pork, shrimp cooked with sizzling rice, and Chinese vegetables."
+    },
+    {
+      "name": "Three Happy Kow",
+      "price": 15.95,
+      "description": "Crab stick, chicken and barbecue pork, cooked with pepper, onion, and pea pod sautéed in black bean sauce."
+    }
+  ],
+  "chicken": [
+    {"note": "served with rice"},
+    {
+      "name": "Moo Shu Chicken",
+      "description": "Served with pancakes",
+      "large_price": 13.50
+    },
+    {
+      "name": "Mongolian Chicken",
+      "small_price": 9.50,
+      "large_price": 12.50
+    },
+    {
+      "name": "Chicken Mixed Vegetables",
+      "small_price": 9.50,
+      "large_price": 12.50,
+      "gf": true
+    },
+    {
+      "name": "Sweet & Sour Chicken",
+      "small_price": 9.50,
+      "large_price": 12.50
+    },
+    {
+      "name": "Mushroom Chicken",
+      "small_price": 9.50,
+      "large_price": 12.50,
+      "gf": true
+    },
+    {
+      "name": "Kung Bao Chicken (Hot!)",
+      "small_price": 9.50,
+      "large_price": 12.50
+    },
+    {
+      "name": "Hunan Chicken (Hot!)",
+      "small_price": 9.50,
+      "large_price": 12.50
+    },
+    {
+      "name": "Empress Chicken (Hot!)",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+      "name": "Szechuan Chicken (Hot!)",
+      "small_price": 9.50,
+      "large_price": 12.50
+    },
+    {
+      "name": "Cashew Chicken",
+      "small_price": 9.50,
+      "large_price": 12.50
+    },
+    {
+      "name": "Chicken with Peapods",
+      "small_price": 9.50,
+      "large_price": 12.50,
+      "gf": true
+    },
+    {
+      "name": "Chicken Broccoli",
+      "small_price": 9.50,
+      "large_price": 12.50,
+      "gf": true
+    },
+    {
+      "name": "Sesame Almond Chicken",
+      "large_price": 13.50
+    },
+    {
+      "name": "Lemon Chicken",
+      "large_price": 13.50
+    },
+    {
+      "name": "Chicken Kow",
+      "small_price": 9.50,
+      "large_price": 12.50,
+      "gf": true
+    },
+    {
+      "name": "Curry Chicken",
+      "small_price": 9.50,
+      "large_price": 12.50
+    },
+    {
+      "name": "Chicken Almond Ding",
+      "small_price": 9.50,
+      "large_price": 12.50,
+      "gf": true
+    },
+    {
+      "name": "Hong Soo Chicken",
+      "small_price": 9.50,
+      "large_price": 12.50
+    },
+    {
+      "name": "Ginger Chicken (Hot!)",
+      "small_price": 9.50,
+      "large_price": 12.50
+    },
+    {
+      "name": "Garlic Chicken (Hot!)",
+      "small_price": 9.50,
+      "large_price": 12.50
+    },
+    {
+      "name": "Pepper Chicken",
+      "small_price": 9.50,
+      "large_price": 12.50
+    }
+  ],
+  "pork": [
+    {"note": "served with rice"},
+    {
+      "name": "Moo Shu Pork",
+      "description": "Served with pancakes",
+      "large_price": 13.50
+    },
+    {
+      "name": "Sweet & Sour Pork",
+      "small_price": 9.50,
+      "large_price": 12.50
+    },
+    {
+      "name": "Hunan Pork (Hot!)",
+      "small_price": 9.50,
+      "large_price": 12.50
+    },
+    {
+      "name": "B.B.Q. Pork with Mixed Vegetables",
+      "small_price": 9.50,
+      "large_price": 12.50
+    },
+    {
+      "name": "B.B.Q. Pork with Mushroom",
+      "small_price": 9.50,
+      "large_price": 12.50
+    },
+    {
+        "name": "Garlic Pork (Hot!)",
+        "small_price": 9.50,
+      "large_price": 12.50
+    }
+  ],
+  "beef": [
+    {"note": "served with rice"},
+    {
+      "name": "Moo Shu Beef",
+      "description": "Served with pancakes",
+      "large_price": 14.50
+    },
+    {
+      "name": "Beef Almond Ding",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+        "name": "Mongolian Beef",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+      "name": "Beef Mixed Vegetables",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+      "name": "Kung Bao Beef (Hot!)",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+      "name": "Hunan Beef (Hot!)",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+      "name": "Beef with Peapods",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+      "name": "Beef Broccoli",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+      "name": "Pepper Tomato Beef",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+      "name": "Szechuan Beef (Hot!)",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+        "name": "Beef Kow",
+        "small_price": 10.50,
+        "large_price": 13.50
+    },
+    {
+      "name": "Pepper Beef",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+        "name": "Curry Beef",
+        "small_price": 10.50,
+        "large_price": 13.50
+    },
+    {
+      "name": "Garlic Beef (Hot!)",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+      "name": "Ginger Beef (Hot!)",
+      "small_price": 10.50,
+      "large_price": 13.50
+    }
+  ],
+  "seafood": [
+    {
+      "name": "Shrimp Lo Mein",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+      "name": "Shrimp Almond Ding",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+      "name": "Shrimp with Vegetables",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+      "name": "Shrimp Peapods",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+      "name": "Sweet & Sour Shrimp",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+      "name": "Shrimp Broccoli",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+      "name": "Shrimp Lobster Sauce",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+      "name": "Kung Pao Shrimp (Hot)",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+      "name": "Shrimp in Black Bean Sauce",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+      "name": "Szechuan Shrimp (Hot)",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+      "name": "Curry Shrimp (Hot)",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+      "name": "Hunan Shrimp (Hot)",
+      "small_price": 10.50,
+      "large_price": 13.50
+    },
+    {
+      "name": "Scallop Broccoli",
+      "small_price": 11.95,
+      "large_price": 14.95
+    },
+    {
+      "name": "Scallop with Mixed Vegetables",
+      "small_price": 11.95,
+      "large_price": 14.95
+    },
+    {
+      "name": "Kung Pao Scallop (Hot)",
+      "small_price": 11.95,
+      "large_price": 14.95
+    },
+    {
+      "name": "Sizzling Shrimp (Hot)",
+      "small_price": 13.50,
+      "large_price": 16.50
+    },
+    {
+      "name": "Sesame Shrimp (Hot)",
+      "small_price": 13.50,
+      "large_price": 16.50
+    }
+  ],
+  "vegetables": [
+    {
+      "name": "Moo Shu Vegetables",
+      "description": "Served with (4) pancakes",
+      "small_price": 9.50,
+      "large_price": 12.50
+    },
+    {
+      "name": "Broccoli in Garlic Sauce (Hot)",
+      "small_price": 9.50,
+      "large_price": 12.50
+    },
+    {
+      "name": "Szechuan Broccoli (Hot)",
+      "small_price": 9.50,
+      "large_price": 12.50
+    },
+    {
+      "name": "Broccoli with Oyster Sauce",
+      "small_price": 9.50,
+      "large_price": 12.50
+    },
+    {
+      "name": "Vegetable Delight",
+      "small_price": 9.50,
+      "large_price": 12.50
+    },
+    {
+      "name": "Bean Curd Home Style (Hot)",
+      "small_price": 9.50,
+      "large_price": 12.50
+    },
+    {
+      "name": "Szechuan Tofu (Hot)",
+      "small_price": 9.50,
+      "large_price": 12.50
+    }
+  ],
+  "egg_foo_young": [
+    {
+      "name": "Egg Foo Young (Chicken, Beef, Pork, Shrimp or Vegetable)",
+      "price": 10.50
+    },
+    {
+      "name": "House Egg Foo Young",
+      "price": 11.50
+    },
+    {
+      "name": "Shrimp or Beef Egg Foo Young",
+      "price": 11.50
+    }
+  ],
+  "fried_rice": [
+    {
+      "name": "Fried Rice (Chicken, Beef, Pork or Vegetable)",
+      "small_price": 8.50,
+      "large_price": 10.50
+    },
+    {
+      "name": "Shrimp or Beef Fried Rice",
+      "small_price": 9.50,
+      "large_price": 11.50
+    },
+    {
+      "name": "Pineapple Fried Rice",
+      "price": 11.50
+    }
+  ],
+  "lo_mein_noodles": {
+    "note": "Lo Mein Noodles contain Wheat",
+    "items": [
+      {
+        "name": "Choice of Chicken, BBQ Pork, Shrimp or Beef",
+        "small_price": 9.50,
+        "large_price": 12.50
+      },
+      {
+        "name": "Vegetable Lo Mein",
+        "small_price": 9.50,
+        "large_price": 12.50
+      },
+      {
+        "name": "House Lo Mein",
+        "small_price": 10.50,
+        "large_price": 13.50
+      }
+    ]
+  },
+  "chow_mein": {
+    "note": "Crispy Noodles on the side (or soft noodles add $1.00)",
+    "items": [
+      {
+        "name": "Choice of Chicken, BBQ Pork, Shrimp or Beef",
+        "small_price": 9.50,
+        "large_price": 12.50
+      },
+      {
+        "name": "Vegetable Chow Mein",
+        "small_price": 9.50,
+        "large_price": 12.50
+      },
+      {
+        "name": "House Chow Mein",
+        "small_price": 10.50,
+        "large_price": 13.50
+      }
+    ]
+  },
+  "eastern_popular_noodles_dishes": [
+    {
+      "name": "Singapore Fried Noodle",
+      "description": "Choice of Chicken & B.B.Q. Pork, mixed with noodles in a special curry sauce (Hot)",
+      "price": 13.95
+    },
+    {
+      "name": "Korean Combo Bowl",
+      "description": "Pan fried noodles with shrimp, beef, chicken & B.B.Q. Pork mixed with vegetables",
+      "price": 13.95
+    },
+    {
+      "name": "Mongolian Beef or Chicken",
+      "description": "Stir fried with green onion, hot red pepper",
+      "price": 13.50
+    },
+    {
+      "name": "Pad Thai Chicken, Pork or Beef",
+      "price": 12.95
+    },
+    {
+      "name": "Pad Thai Shrimp",
+      "price": 13.95
+    },
+    {
+      "name": "Goongbao or Orange Chicken (Hot)",
+      "price": 13.50
+    },
+    {
+      "name": "Ginger Chicken",
+      "price": 12.50
+    }
+  ],
+  "side_orders": [
+    {
+      "name": "Crispy Noodles",
+      "price": 3.25
+    },
+    {
+      "name": "Peanut Rice",
+      "price": 3.25
+    },
+    {
+      "name": "Almond Cookies (5)",
+      "price": 2.00
+    },
+    {
+      "name": "Fried Noodles",
+      "price": 2.00
+    },
+    {
+      "name": "Fortune Cookies (5)",
+      "price": 2.00
+    },
+    {
+      "name": "Gravy",
+      "price": 3.00
+    }
+  ],
+  "drinks": [
+    {
+      "name": "Hot Tea",
+      "price": 2.00
+    },
+    {
+      "name": "Soft Drinks",
+      "price": 2.75
+    }
+  ],
+  "extra": [
+    {
+      "name": "Extra Vegetable",
+      "price": 3.00
+    },
+    {
+      "name": "Extra Chicken or Pork",
+      "price": 4.00
+    },
+    {
+      "name": "Extra Shrimp or Beef",
+      "price": 4.50
+    }
+  ],
+  "gluten_free": {
+    "items": [
+      {
+        "name": "Gluten Free",
+        "note": "(We can make any dishes Gluten Free)"
+      }
+    ]
+  }
+}
+
+

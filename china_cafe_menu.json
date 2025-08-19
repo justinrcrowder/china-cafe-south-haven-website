@@ -1,0 +1,203 @@
+{
+    "Appetizers": [
+        {
+            "item": "Egg Roll (1)",
+            "price": 1.55
+        },
+        {
+            "item": "Spring Roll (1)",
+            "price": 1.75
+        },
+        {
+            "item": "Crab Rangoon (6)",
+            "price": 4.85
+        },
+        {
+            "item": "Fried Chicken Wings (4)",
+            "price": 5.75
+        },
+        {
+            "item": "Fried Jumbo Shrimp (6)",
+            "price": 6.95
+        },
+        {
+            "item": "Fried Baby Shrimp (16)",
+            "price": 5.65
+        },
+        {
+            "item": "Fried or Steamed Dumplings (6)",
+            "price": 5.95
+        },
+        {
+            "item": "Fried Donuts (10)",
+            "price": 4.5
+        },
+        {
+            "item": "Beef Teriyaki Stick (4)",
+            "price": 6.25
+        },
+        {
+            "item": "Chicken Teriyaki Stick (4)",
+            "price": 5.75
+        },
+        {
+            "item": "Shrimp Toast (4)",
+            "price": 5.25
+        },
+        {
+            "item": "Boneless Spare Ribs",
+            "price": 7.75
+        },
+        {
+            "item": "Spare Ribs (4)",
+            "price": 6.75
+        }
+    ],
+    "Soups": [
+        {
+            "item": "Hot & Sour Soup (for 2)",
+            "price": 4.95
+        },
+        {
+            "item": "Hot & Sour Soup",
+            "price": 2.95
+        },
+        {
+            "item": "Wonton Soup",
+            "price": 2.95
+        },
+        {
+            "item": "Egg Drop Soup",
+            "price": 2.95
+        },
+        {
+            "item": "Chicken Noodle Soup",
+            "price": 2.95
+        },
+        {
+            "item": "Shrimp Rice Soup (for 2)",
+            "price": 5.75
+        }
+    ],
+    "ChefSpecialties": [
+        {
+            "item": "Sesame Chicken",
+            "price": 15.65
+        },
+        {
+            "item": "Orange Chicken",
+            "price": 15.65
+        },
+        {
+            "item": "General Tso\u2019s Chicken",
+            "price": 15.65
+        },
+        {
+            "item": "Sweet & Sour Chicken",
+            "price": 15.65
+        },
+        {
+            "item": "Happy Family",
+            "price": 16.95
+        },
+        {
+            "item": "Seafood Combination",
+            "price": 16.95
+        },
+        {
+            "item": "Dragon & Phoenix",
+            "price": 16.95
+        },
+        {
+            "item": "Triple Delight",
+            "price": 16.25
+        },
+        {
+            "item": "Mongolian Beef",
+            "price": 15.65
+        },
+        {
+            "item": "Sesame Shrimp",
+            "price": 16.95
+        },
+        {
+            "item": "Orange Beef",
+            "price": 15.65
+        },
+        {
+            "item": "General Tso\u2019s Shrimp",
+            "price": 16.95
+        },
+        {
+            "item": "Scallops w. Garlic Sauce",
+            "price": 16.95
+        }
+    ],
+    "Chicken": [
+        {
+            "item": "Moo Shu Chicken (w. 4 pancakes)",
+            "large": 13.25,
+            "small": 9.25
+        },
+        {
+            "item": "Sweet & Sour Chicken",
+            "large": 13.25,
+            "small": 9.25
+        },
+        {
+            "item": "Kung Pao Chicken",
+            "large": 13.25,
+            "small": 9.25
+        },
+        {
+            "item": "Curry Chicken",
+            "large": 13.25,
+            "small": 9.25
+        },
+        {
+            "item": "Cashew Chicken",
+            "large": 13.25,
+            "small": 9.25
+        },
+        {
+            "item": "Szechuan Chicken",
+            "large": 13.25,
+            "small": 9.25
+        },
+        {
+            "item": "Hunan Chicken",
+            "large": 13.25,
+            "small": 9.25
+        },
+        {
+            "item": "Chicken w. Garlic Sauce",
+            "large": 13.25,
+            "small": 9.25
+        },
+        {
+            "item": "Broccoli Chicken",
+            "large": 13.25,
+            "small": 9.25
+        },
+        {
+            "item": "Pepper Chicken",
+            "large": 13.25,
+            "small": 9.25
+        },
+        {
+            "item": "Chicken w. Chinese Veg",
+            "large": 13.25,
+            "small": 9.25
+        },
+        {
+            "item": "Mushroom Chicken",
+            "large": 13.25,
+            "small": 9.25
+        },
+        {
+            "item": "Almond Chicken",
+            "large": 13.25,
+            "small": 9.25
+        }
+    ]
+}

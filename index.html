@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>China Cafe - Authentic Chinese Cuisine in South Haven, MI</title>
+    <meta name="description" content="China Cafe offers authentic Mandarin, Szechuan, Hunan, and Cantonese cuisine in South Haven, Michigan. Order takeout today!">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&family=Noto+Serif:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>CHINA CAFE</h1>
+            </div>
+            <nav class="nav">
+                <a href="tel:2696378591" class="btn btn-secondary">
+                    <i class="fas fa-phone"></i> Order Now
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Restaurant Info Section -->
+    <section id="home" class="info-section">
+        <div class="container">
+            <div class="restaurant-info">
+                <div class="info-grid">
+                    <div class="info-card">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Hours</h4>
+                            <p>Tue-Fri: 11AM-8PM<br>Sat-Sun: 12PM-8PM<br><span class="closed">Monday: CLOSED</span></p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Order Now</h4>
+                            <a href="tel:2696378591">(269) 637-8591</a>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Location</h4>
+                            <p>319 Broadway<br>South Haven, MI 49090</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu-section">
+        <div class="container">
+            <h2 class="section-title">Our Menu</h2>
+            
+            <!-- Menu Navigation -->
+            <div class="menu-nav">
+                <button class="menu-cat-btn active" data-category="lunch">Lunch Specials</button>
+                <button class="menu-cat-btn" data-category="appetizers">Appetizers</button>
+                <button class="menu-cat-btn" data-category="soups">Soups</button>
+                <button class="menu-cat-btn" data-category="specialties">Chef's Specialties</button>
+                <button class="menu-cat-btn" data-category="chicken">Chicken</button>
+                <button class="menu-cat-btn" data-category="pork">Pork</button>
+                <button class="menu-cat-btn" data-category="beef">Beef</button>
+                <button class="menu-cat-btn" data-category="seafood">Seafood</button>
+                <button class="menu-cat-btn" data-category="vegetables">Vegetables</button>
+                <button class="menu-cat-btn" data-category="noodles">Noodles & Rice</button>
+                <button class="menu-cat-btn" data-category="sides">Sides</button>
+            </div>
+
+            <!-- Lunch Menu -->
+            <div class="menu-category active" id="lunch">
+                <h3>Lunch Special Menu</h3>
+                <p class="menu-description">Available 11:00 AM to 3:30 PM • Served with Steamed Rice, Pork Fried Rice, Spring Roll</p>
+                <div class="menu-grid" id="lunchItems"></div>
+            </div>
+
+            <!-- Appetizers -->
+            <div class="menu-category" id="appetizers">
+                <h3>Appetizers</h3>
+                <div class="menu-grid" id="appetizerItems"></div>
+            </div>
+
+            <!-- Soups -->
+            <div class="menu-category" id="soups">
+                <h3>Soups</h3>
+                <div class="menu-grid" id="soupItems"></div>
+            </div>
+
+            <!-- Chef's Specialties -->
+            <div class="menu-category" id="specialties">
+                <h3>Chef's Specialties</h3>
+                <div class="specialties-grid" id="specialtiesItems"></div>
+            </div>
+
+            <!-- Chicken -->
+            <div class="menu-category" id="chicken">
+                <h3>Chicken Dishes</h3>
+                <div class="menu-grid" id="chickenItems"></div>
+            </div>
+
+            <!-- Pork -->
+            <div class="menu-category" id="pork">
+                <h3>Pork Dishes</h3>
+                <div class="menu-grid" id="porkItems"></div>
+            </div>
+
+            <!-- Beef -->
+            <div class="menu-category" id="beef">
+                <h3>Beef Dishes</h3>
+                <div class="menu-grid" id="beefItems"></div>
+            </div>
+
+            <!-- Seafood -->
+            <div class="menu-category" id="seafood">
+                <h3>Seafood Dishes</h3>
+                <div class="menu-grid" id="seafoodItems"></div>
+            </div>
+
+            <!-- Vegetables -->
+            <div class="menu-category" id="vegetables">
+                <h3>Vegetable Dishes</h3>
+                <div class="menu-grid" id="vegetableItems"></div>
+            </div>
+
+            <!-- Noodles & Rice -->
+            <div class="menu-category" id="noodles">
+                <h3>Noodles & Rice</h3>
+                <div class="menu-grid" id="noodleItems"></div>
+                <div class="menu-grid" id="riceItems"></div>
+            </div>
+
+            <!-- Sides -->
+            <div class="menu-category" id="sides">
+                <h3>Sides</h3>
+                <div class="menu-grid" id="sideItems"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>CHINA CAFE</h3>
+                    <p>Authentic Chinese Cuisine</p>
+                </div>
+                <div class="footer-info">
+                    <p>&copy; 2025 China Cafe. All rights reserved.</p>
+                    <p>319 Broadway, South Haven, MI 49090 • (269) 637-8591</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
