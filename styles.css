@@ -300,6 +300,24 @@ body {
     gap: 0;
 }
 
+.subsection-header {
+    margin: 2rem 0 1rem 0;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid var(--primary-green);
+}
+
+.subsection-header h4 {
+    color: var(--primary-green);
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.subsection-header:first-child {
+    margin-top: 0;
+}
+
 .menu-item {
     background: none;
     border-radius: 0;
