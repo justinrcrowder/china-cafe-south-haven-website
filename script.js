@@ -27,38 +27,62 @@ const menuCategories = [
     {
         key: 'chicken',
         id: 'chicken',
-        title: 'Chicken Dishes'
+        title: 'Chicken'
     },
     {
         key: 'pork',
         id: 'pork',
-        title: 'Pork Dishes'
+        title: 'Pork'
     },
     {
         key: 'beef',
         id: 'beef',
-        title: 'Beef Dishes'
+        title: 'Beef'
     },
     {
         key: 'seafood',
         id: 'seafood',
-        title: 'Seafood Dishes'
+        title: 'Seafood'
     },
     {
         key: 'vegetables',
         id: 'vegetables',
-        title: 'Vegetable Dishes'
+        title: 'Vegetables'
     },
     {
-        key: 'noodles_rice',
-        id: 'noodles',
-        title: 'Noodles & Rice',
-        isComposite: true // Special handling for multiple subcategories
+        key: 'lo_mein_noodles',
+        id: 'lo_mein',
+        title: 'Lo Mein Noodles'
     },
     {
-        key: 'sides_drinks',
-        id: 'sides',
-        title: 'Sides & Beverages',
+        key: 'chow_mein_chop_suey',
+        id: 'chow_mein',
+        title: 'Chow Mein & Chop Suey'
+    },
+    {
+        key: 'eastern_popular_noodles_dishes',
+        id: 'eastern_noodles',
+        title: 'Eastern Popular Noodles'
+    },
+    {
+        key: 'fried_rice',
+        id: 'fried_rice',
+        title: 'Fried Rice'
+    },
+    {
+        key: 'egg_foo_young',
+        id: 'egg_foo_young',
+        title: 'Egg Foo Young'
+    },
+    {
+        key: 'drinks',
+        id: 'drinks',
+        title: 'Beverages'
+    },
+    {
+        key: 'sides_extras',
+        id: 'sides_extras',
+        title: 'Sides & Extras',
         isComposite: true // Special handling for multiple subcategories
     }
 ];
@@ -69,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
     showMenuLoading();
     loadMenuData();
     setupSmoothScrolling();
+    setupBackToTopButton();
 });
 
 // Load menu data from JSON file
@@ -92,16 +117,35 @@ async function loadMenuData() {
 // Generate navigation buttons dynamically
 function generateMenuNavigation() {
     const navContainer = document.getElementById('menuNavigation');
-    if (!navContainer) return;
+    const mobileNavSelect = document.getElementById('mobileNavSelect');
+    if (!navContainer && !mobileNavSelect) return;
     
-    navContainer.innerHTML = '';
+    // Clear existing content
+    if (navContainer) navContainer.innerHTML = '';
+    if (mobileNavSelect) {
+        // Keep the first option and clear the rest
+        const firstOption = mobileNavSelect.querySelector('option[value=""]');
+        mobileNavSelect.innerHTML = '';
+        if (firstOption) mobileNavSelect.appendChild(firstOption);
+    }
     
     menuCategories.forEach((category, index) => {
-        const button = document.createElement('button');
-        button.className = `menu-cat-btn ${index === 0 ? 'active' : ''}`;
-        button.setAttribute('data-category', category.id);
-        button.textContent = category.title;
-        navContainer.appendChild(button);
+        // Generate desktop navigation buttons
+        if (navContainer) {
+            const button = document.createElement('button');
+            button.className = `menu-cat-btn ${index === 0 ? 'active' : ''}`;
+            button.setAttribute('data-category', category.id);
+            button.textContent = category.title;
+            navContainer.appendChild(button);
+        }
+        
+        // Generate mobile navigation options
+        if (mobileNavSelect) {
+            const option = document.createElement('option');
+            option.value = category.id;
+            option.textContent = category.title;
+            mobileNavSelect.appendChild(option);
+        }
     });
 }
 
@@ -124,17 +168,19 @@ function generateMenuCategories() {
         }
         
         // Handle composite categories differently
-        if (category.isComposite) {
-            if (category.id === 'noodles') {
-                categoryHTML += `
-                    <div class="menu-grid" id="noodleItems"></div>
-                    <div class="menu-grid" id="riceItems"></div>
-                `;
-            } else if (category.id === 'sides') {
-                categoryHTML += `<div class="menu-grid" id="sideItems"></div>`;
-            }
+        if (category.isComposite && category.id === 'sides_extras') {
+            categoryHTML += `
+                <div class="subsection-header">
+                    <h4>Side Orders</h4>
+                </div>
+                <div class="menu-grid" id="side_ordersItems"></div>
+                <div class="subsection-header">
+                    <h4>Extra Portions</h4>
+                </div>
+                <div class="menu-grid" id="extraItems"></div>
+            `;
         } else {
-            // Regular categories
+            // All other categories use regular grid
             const gridClass = 'menu-grid';
             categoryHTML += `<div class="${gridClass}" id="${category.id}Items"></div>`;
         }
@@ -148,7 +194,9 @@ function generateMenuCategories() {
 function setupMenuNavigation() {
     const menuCategoryButtons = document.querySelectorAll('.menu-cat-btn');
     const menuCategoryDivs = document.querySelectorAll('.menu-category');
+    const mobileNavSelect = document.getElementById('mobileNavSelect');
     
+    // Desktop navigation
     menuCategoryButtons.forEach(button => {
         button.addEventListener('click', function() {
             const category = this.dataset.category;
@@ -160,15 +208,53 @@ function setupMenuNavigation() {
             
             // Update active category visually (for CSS styling)
             menuCategoryDivs.forEach(cat => cat.classList.remove('active'));
-            targetSection.classList.add('active');
+            if (targetSection) targetSection.classList.add('active');
             
-            // Smooth scroll to the category
-            targetSection.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            // Smooth scroll to the category with header offset
+            if (targetSection) {
+                const header = document.querySelector('.header');
+                const headerHeight = header ? header.offsetHeight : 80; // fallback to 80px
+                const offset = headerHeight + 20; // extra 20px padding
+                
+                const elementPosition = targetSection.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
         });
     });
+    
+    // Mobile navigation
+    if (mobileNavSelect) {
+        mobileNavSelect.addEventListener('change', function() {
+            const category = this.value;
+            if (!category) return;
+            
+            const targetSection = document.getElementById(category);
+            if (!targetSection) return;
+            
+            // Smooth scroll to the category with header offset
+            const header = document.querySelector('.header');
+            const headerHeight = header ? header.offsetHeight : 80; // fallback to 80px
+            const offset = headerHeight + 20; // extra 20px padding
+            
+            const elementPosition = targetSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - offset;
+            
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+            
+            // Reset select to default option after scrolling
+            setTimeout(() => {
+                this.value = '';
+            }, 500);
+        });
+    }
 }
 
 // Setup smooth scrolling for anchor links
@@ -178,9 +264,17 @@ function setupSmoothScrolling() {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                // Account for sticky header height
+                const header = document.querySelector('.header');
+                const headerHeight = header ? header.offsetHeight : 80; // fallback to 80px
+                const offset = headerHeight + 20; // extra 20px padding
+                
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
                 });
             }
         });
@@ -201,8 +295,13 @@ function populateAllMenuItems() {
     populateBeefDishes();
     populateSeafoodDishes();
     populateVegetableDishes();
-    populateNoodlesAndRice();
-    populateSides();
+    populateLoMeinNoodles();
+    populateChowMeinChopSuey();
+    populateEasternNoodles();
+    populateFriedRice();
+    populateEggFooYoung();
+    populateDrinks();
+    populateSidesExtras();
 }
 
 function populateLunchMenu() {
@@ -345,125 +444,122 @@ function populateMenuItems() {
 }
 
 
-function populateNoodlesAndRice() {
-    const noodleContainer = document.getElementById('noodleItems');
-    const riceContainer = document.getElementById('riceItems');
-    
-    if (!noodleContainer || !riceContainer) return;
-    
-    // Clear containers
-    noodleContainer.innerHTML = '';
-    riceContainer.innerHTML = '';
-    
-    // Add Lo Mein dishes
-    if (menuData.lo_mein_noodles) {
-        const menuItems = menuData.lo_mein_noodles.filter(item => item.name);
-        const note = menuData.lo_mein_noodles.find(item => item.note)?.note;
-        menuItems.forEach(item => {
-            const prices = getPrice(item);
-            const menuItem = createMenuItem(item.name, null, prices, note, false, item.gf);
-            noodleContainer.appendChild(menuItem);
-        });
-    }
-    
-    // Add Chow Mein dishes
-    if (menuData.chow_mein_chop_suey) {
-        const menuItems = menuData.chow_mein_chop_suey.filter(item => item.name);
-        const note = menuData.chow_mein_chop_suey.find(item => item.note)?.note;
-        menuItems.forEach(item => {
-            const prices = getPrice(item);
-            const menuItem = createMenuItem(item.name, null, prices, note, false, item.gf);
-            noodleContainer.appendChild(menuItem);
-        });
-    }
-    
-    // Add Eastern Popular Noodles
-    if (menuData.eastern_popular_noodles_dishes) {
-        const menuItems = menuData.eastern_popular_noodles_dishes.filter(item => item.name);
-        menuItems.forEach(item => {
-            const prices = getPrice(item);
-            const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
-            noodleContainer.appendChild(menuItem);
-        });
-    }
-    
-    // Add Fried Rice dishes
-    if (menuData.fried_rice) {
-        const menuItems = menuData.fried_rice.filter(item => item.name);
-        menuItems.forEach(item => {
-            const prices = getPrice(item);
-            const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
-            riceContainer.appendChild(menuItem);
-        });
-    }
-    
-    // Add Egg Foo Young dishes
-    if (menuData.egg_foo_young) {
-        const menuItems = menuData.egg_foo_young.filter(item => item.name);
-        menuItems.forEach(item => {
-            const prices = getPrice(item);
-            const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
-            riceContainer.appendChild(menuItem);
-        });
-    }
-}
-
-
-
-function populateSides() {
-    const container = document.getElementById('sideItems');
-    if (!container) return;
+function populateLoMeinNoodles() {
+    const container = document.getElementById('lo_meinItems');
+    if (!container || !menuData.lo_mein_noodles) return;
     
     container.innerHTML = '';
     
-    // Add side orders section
-    if (menuData.side_orders) {
-        // Add section header
-        const sideHeader = document.createElement('div');
-        sideHeader.className = 'subsection-header';
-        sideHeader.innerHTML = '<h4>Side Orders</h4>';
-        container.appendChild(sideHeader);
-        
+    const menuItems = menuData.lo_mein_noodles.filter(item => item.name);
+    const note = menuData.lo_mein_noodles.find(item => item.note)?.note;
+    menuItems.forEach(item => {
+        const prices = getPrice(item);
+        const menuItem = createMenuItem(item.name, null, prices, note, false, item.gf);
+        container.appendChild(menuItem);
+    });
+}
+
+function populateChowMeinChopSuey() {
+    const container = document.getElementById('chow_meinItems');
+    if (!container || !menuData.chow_mein_chop_suey) return;
+    
+    container.innerHTML = '';
+    
+    const menuItems = menuData.chow_mein_chop_suey.filter(item => item.name);
+    const note = menuData.chow_mein_chop_suey.find(item => item.note)?.note;
+    menuItems.forEach(item => {
+        const prices = getPrice(item);
+        const menuItem = createMenuItem(item.name, null, prices, note, false, item.gf);
+        container.appendChild(menuItem);
+    });
+}
+
+function populateEasternNoodles() {
+    const container = document.getElementById('eastern_noodlesItems');
+    if (!container || !menuData.eastern_popular_noodles_dishes) return;
+    
+    container.innerHTML = '';
+    
+    const menuItems = menuData.eastern_popular_noodles_dishes.filter(item => item.name);
+    menuItems.forEach(item => {
+        const prices = getPrice(item);
+        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
+        container.appendChild(menuItem);
+    });
+}
+
+function populateFriedRice() {
+    const container = document.getElementById('fried_riceItems');
+    if (!container || !menuData.fried_rice) return;
+    
+    container.innerHTML = '';
+    
+    const menuItems = menuData.fried_rice.filter(item => item.name);
+    menuItems.forEach(item => {
+        const prices = getPrice(item);
+        const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
+        container.appendChild(menuItem);
+    });
+}
+
+function populateEggFooYoung() {
+    const container = document.getElementById('egg_foo_youngItems');
+    if (!container || !menuData.egg_foo_young) return;
+    
+    container.innerHTML = '';
+    
+    const menuItems = menuData.egg_foo_young.filter(item => item.name);
+    menuItems.forEach(item => {
+        const prices = getPrice(item);
+        const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
+        container.appendChild(menuItem);
+    });
+}
+
+function populateDrinks() {
+    const container = document.getElementById('drinksItems');
+    if (!container || !menuData.drinks) return;
+    
+    container.innerHTML = '';
+    
+    const menuItems = menuData.drinks.filter(item => item.name);
+    menuItems.forEach(item => {
+        const prices = getPrice(item);
+        const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
+        container.appendChild(menuItem);
+    });
+}
+
+function populateSidesExtras() {
+    // This function populates the combined Sides & Extras section
+    // The HTML structure is created by generateMenuCategories with subsection headers
+    
+    // Populate Side Orders subsection
+    const sideOrdersContainer = document.getElementById('side_ordersItems');
+    if (sideOrdersContainer && menuData.side_orders) {
+        sideOrdersContainer.innerHTML = '';
         const menuItems = menuData.side_orders.filter(item => item.name);
         menuItems.forEach(item => {
             const prices = getPrice(item);
             const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
-            container.appendChild(menuItem);
+            sideOrdersContainer.appendChild(menuItem);
         });
     }
     
-    // Add drinks section
-    if (menuData.drinks) {
-        // Add section header
-        const drinkHeader = document.createElement('div');
-        drinkHeader.className = 'subsection-header';
-        drinkHeader.innerHTML = '<h4>Beverages</h4>';
-        container.appendChild(drinkHeader);
-        
-        const menuItems = menuData.drinks.filter(item => item.name);
-        menuItems.forEach(item => {
-            const prices = getPrice(item);
-            const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
-            container.appendChild(menuItem);
-        });
-    }
-    
-    // Add extra items section
-    if (menuData.extra) {
-        // Add section header
-        const extraHeader = document.createElement('div');
-        extraHeader.className = 'subsection-header';
-        extraHeader.innerHTML = '<h4>Extra Portions</h4>';
-        container.appendChild(extraHeader);
-        
+    // Populate Extra Portions subsection
+    const extraContainer = document.getElementById('extraItems');
+    if (extraContainer && menuData.extra) {
+        extraContainer.innerHTML = '';
         const menuItems = menuData.extra.filter(item => item.name);
         menuItems.forEach(item => {
             const prices = getPrice(item);
             const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
-            container.appendChild(menuItem);
+            extraContainer.appendChild(menuItem);
         });
     }
 }
+
+
 
 // Helper function to get properly formatted price from menu item
 function getPrice(item) {
@@ -631,12 +727,29 @@ function setupBackToTopButton() {
         }
     }
 
-    // Smooth scroll to top
+    // Smooth scroll to top of menu section
     function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        const menuSection = document.getElementById('menu');
+        if (menuSection) {
+            // Get header height to offset scroll position
+            const header = document.querySelector('.header');
+            const headerHeight = header ? header.offsetHeight : 80; // fallback to 80px
+            const offset = headerHeight + 20; // extra 20px padding
+            
+            const elementPosition = menuSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - offset;
+            
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        } else {
+            // Fallback to page top if menu section not found
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
     }
 
     // Event listeners
@@ -646,8 +759,3 @@ function setupBackToTopButton() {
     // Initial check
     toggleBackToTopButton();
 }
-
-// Initialize back to top button when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    setupBackToTopButton();
-});

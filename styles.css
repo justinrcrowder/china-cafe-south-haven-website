@@ -588,7 +588,7 @@ body {
 }
 
 .menu-item-note {
-    color: var(--primary-green);
+    color: var(--gray-medium);
     font-size: 0.8rem;
     font-style: italic;
     margin-top: 0.25rem;
@@ -667,11 +667,60 @@ body {
         width: 45px;
         height: 45px;
         font-size: 1.1rem;
+        z-index: 9999; /* Ensure it's above other mobile elements */
+    }
+    
+    /* Hide desktop navigation on mobile */
+    .menu-nav {
+        display: none;
+    }
+    
+    /* Mobile menu navigation */
+    .mobile-menu-nav {
+        display: block;
+        margin-bottom: 2rem;
+    }
+    
+    .mobile-nav-select {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid var(--primary-red);
+        border-radius: var(--border-radius);
+        background: var(--white);
+        color: var(--gray-dark);
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DC143C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 1rem;
+        padding-right: 3rem;
+        position: relative;
+        z-index: 10; /* Lower than back-to-top button */
+    }
+    
+    .mobile-nav-select:focus {
+        outline: none;
+        border-color: var(--warm-red);
+        box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.1);
+    }
+    
+    /* Show all categories on mobile for full menu display */
+    .menu-category {
+        display: block !important;
+        margin-bottom: 3rem;
     }
 }
 
 /* Tablet Styles */
 @media (min-width: 768px) {
+    /* Hide mobile navigation on desktop */
+    .mobile-menu-nav {
+        display: none;
+    }
+    
     /* Hide mobile info section on tablet and larger */
     .info-section.mobile-only {
         display: none;
