@@ -405,6 +405,18 @@ body {
     content: " 🌶️";
 }
 
+.gf-indicator {
+    background-color: var(--primary-green);
+    color: white;
+    font-size: 0.55rem;
+    font-weight: 600;
+    padding: 0.1rem 0.25rem;
+    border-radius: 2px;
+    margin-left: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
 .menu-item-price {
     color: var(--primary-red);
     font-weight: 700;

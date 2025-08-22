@@ -88,7 +88,7 @@ function populateLunchMenu() {
     const menuItems = menuData.lunch_menu.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, null, prices, null, isHotDish(item.name));
+        const menuItem = createMenuItem(item.name, null, prices, null, isHotDish(item.name), item.gf);
         container.appendChild(menuItem);
     });
 }
@@ -101,7 +101,7 @@ function populateAppetizers() {
     
     menuData.appetizers.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.note, prices, null, false);
+        const menuItem = createMenuItem(item.name, item.note, prices, null, false, item.gf);
         container.appendChild(menuItem);
     });
 }
@@ -116,7 +116,7 @@ function populateChickenDishes() {
     const menuItems = menuData.chicken.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name));
+        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
         container.appendChild(menuItem);
     });
 }
@@ -131,7 +131,7 @@ function populateBeefDishes() {
     const menuItems = menuData.beef.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name));
+        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
         container.appendChild(menuItem);
     });
 }
@@ -146,7 +146,7 @@ function populateSeafoodDishes() {
     const menuItems = menuData.seafood.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name));
+        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
         container.appendChild(menuItem);
     });
 }
@@ -161,7 +161,7 @@ function populateVegetableDishes() {
     const menuItems = menuData.vegetables.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name));
+        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
         container.appendChild(menuItem);
     });
 }
@@ -194,7 +194,7 @@ function populateAppetizers() {
     const menuItems = menuData.appetizers.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, false);
+        const menuItem = createMenuItem(item.name, item.description, prices, null, false, item.gf);
         container.appendChild(menuItem);
     });
 }
@@ -209,7 +209,7 @@ function populateSoups() {
     const menuItems = menuData.soups.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name));
+        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
         container.appendChild(menuItem);
     });
 }
@@ -224,7 +224,7 @@ function populatePorkDishes() {
     const menuItems = menuData.pork.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name));
+        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
         container.appendChild(menuItem);
     });
 }
@@ -239,7 +239,7 @@ function populateVegetableDishes() {
     const menuItems = menuData.vegetables.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name));
+        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
         container.appendChild(menuItem);
     });
 }
@@ -260,7 +260,7 @@ function populateNoodlesAndRice() {
         const note = menuData.lo_mein_noodles.find(item => item.note)?.note;
         menuItems.forEach(item => {
             const prices = getPrice(item);
-            const menuItem = createMenuItem(item.name, null, prices, note, false);
+            const menuItem = createMenuItem(item.name, null, prices, note, false, item.gf);
             noodleContainer.appendChild(menuItem);
         });
     }
@@ -271,7 +271,7 @@ function populateNoodlesAndRice() {
         const note = menuData.chow_mein_chop_suey.find(item => item.note)?.note;
         menuItems.forEach(item => {
             const prices = getPrice(item);
-            const menuItem = createMenuItem(item.name, null, prices, note, false);
+            const menuItem = createMenuItem(item.name, null, prices, note, false, item.gf);
             noodleContainer.appendChild(menuItem);
         });
     }
@@ -281,7 +281,7 @@ function populateNoodlesAndRice() {
         const menuItems = menuData.eastern_popular_noodles_dishes.filter(item => item.name);
         menuItems.forEach(item => {
             const prices = getPrice(item);
-            const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name));
+            const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
             noodleContainer.appendChild(menuItem);
         });
     }
@@ -291,7 +291,7 @@ function populateNoodlesAndRice() {
         const menuItems = menuData.fried_rice.filter(item => item.name);
         menuItems.forEach(item => {
             const prices = getPrice(item);
-            const menuItem = createMenuItem(item.name, null, prices, null, false);
+            const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
             riceContainer.appendChild(menuItem);
         });
     }
@@ -301,7 +301,7 @@ function populateNoodlesAndRice() {
         const menuItems = menuData.egg_foo_young.filter(item => item.name);
         menuItems.forEach(item => {
             const prices = getPrice(item);
-            const menuItem = createMenuItem(item.name, null, prices, null, false);
+            const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
             riceContainer.appendChild(menuItem);
         });
     }
@@ -318,7 +318,7 @@ function populateRiceDishes() {
         const menuItems = menuData.fried_rice.filter(item => item.name);
         menuItems.forEach(item => {
             const prices = getPrice(item);
-            const menuItem = createMenuItem(item.name, null, prices, null, false);
+            const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
             container.appendChild(menuItem);
         });
     }
@@ -328,7 +328,7 @@ function populateRiceDishes() {
         const menuItems = menuData.egg_foo_young.filter(item => item.name);
         menuItems.forEach(item => {
             const prices = getPrice(item);
-            const menuItem = createMenuItem(item.name, null, prices, null, false);
+            const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
             container.appendChild(menuItem);
         });
     }
@@ -361,7 +361,7 @@ function populateWeightWatchers() {
     const menuItems = menuData.weight_watchers_menu.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, null, prices, null, false);
+        const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
         container.appendChild(menuItem);
     });
 }
@@ -383,7 +383,7 @@ function populateSides() {
         const menuItems = menuData.side_orders.filter(item => item.name);
         menuItems.forEach(item => {
             const prices = getPrice(item);
-            const menuItem = createMenuItem(item.name, null, prices, null, false);
+            const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
             container.appendChild(menuItem);
         });
     }
@@ -399,7 +399,7 @@ function populateSides() {
         const menuItems = menuData.drinks.filter(item => item.name);
         menuItems.forEach(item => {
             const prices = getPrice(item);
-            const menuItem = createMenuItem(item.name, null, prices, null, false);
+            const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
             container.appendChild(menuItem);
         });
     }
@@ -415,7 +415,7 @@ function populateSides() {
         const menuItems = menuData.extra.filter(item => item.name);
         menuItems.forEach(item => {
             const prices = getPrice(item);
-            const menuItem = createMenuItem(item.name, null, prices, null, false);
+            const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
             container.appendChild(menuItem);
         });
     }
@@ -435,11 +435,12 @@ function getPrice(item) {
 }
 
 // Helper function to create menu item HTML
-function createMenuItem(name, description, price, note, isHot) {
+function createMenuItem(name, description, price, note, isHot, isGlutenFree = false) {
     const div = document.createElement('div');
     div.className = 'menu-item';
     
     const nameClass = isHot ? 'menu-item-name hot' : 'menu-item-name';
+    const gfIcon = isGlutenFree ? ' <span class="gf-indicator">GF</span>' : '';
     
     let priceHTML = '';
     if (typeof price === 'object' && price && price.small && price.large) {
@@ -457,7 +458,7 @@ function createMenuItem(name, description, price, note, isHot) {
     
     div.innerHTML = `
         <div class="menu-item-header">
-            <h4 class="${nameClass}">${name}</h4>
+            <h4 class="${nameClass}">${name}${gfIcon}</h4>
             ${priceHTML}
         </div>
         ${description ? `<p class="menu-item-description">${description}</p>` : ''}
