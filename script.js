@@ -1,15 +1,73 @@
 // Menu data from JSON file
 let menuData = null;
 
-// DOM elements
-const menuCategoryButtons = document.querySelectorAll('.menu-cat-btn');
-const menuCategories = document.querySelectorAll('.menu-category');
+// Menu categories configuration
+const menuCategories = [
+    {
+        key: 'lunch_menu',
+        id: 'lunch',
+        title: 'Lunch Specials',
+        description: 'Available 11:00 AM to 2:30 PM Tuesday-Saturday (Except Holidays) • Entrees Include: Crab Rangoon (2), Fried Rice, Fortune Cookie'
+    },
+    {
+        key: 'appetizers',
+        id: 'appetizers',
+        title: 'Appetizers'
+    },
+    {
+        key: 'soups',
+        id: 'soups',
+        title: 'Soups'
+    },
+    {
+        key: 'chef_s_specialties',
+        id: 'specialties',
+        title: 'Chef\'s Specialties'
+    },
+    {
+        key: 'chicken',
+        id: 'chicken',
+        title: 'Chicken Dishes'
+    },
+    {
+        key: 'pork',
+        id: 'pork',
+        title: 'Pork Dishes'
+    },
+    {
+        key: 'beef',
+        id: 'beef',
+        title: 'Beef Dishes'
+    },
+    {
+        key: 'seafood',
+        id: 'seafood',
+        title: 'Seafood Dishes'
+    },
+    {
+        key: 'vegetables',
+        id: 'vegetables',
+        title: 'Vegetable Dishes'
+    },
+    {
+        key: 'noodles_rice',
+        id: 'noodles',
+        title: 'Noodles & Rice',
+        isComposite: true // Special handling for multiple subcategories
+    },
+    {
+        key: 'sides_drinks',
+        id: 'sides',
+        title: 'Sides & Beverages',
+        isComposite: true // Special handling for multiple subcategories
+    }
+];
 
 // Initialize the website
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM Content Loaded - starting initialization');
+    showMenuLoading();
     loadMenuData();
-    setupMenuNavigation();
     setupSmoothScrolling();
 });
 
@@ -21,26 +79,94 @@ async function loadMenuData() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         menuData = await response.json();
-        populateMenuItems();
+        generateMenuNavigation();
+        generateMenuCategories();
+        populateAllMenuItems();
+        setupMenuNavigation();
     } catch (error) {
         console.error('Error loading menu data:', error);
         showMenuError();
     }
 }
 
-// Setup menu category navigation
+// Generate navigation buttons dynamically
+function generateMenuNavigation() {
+    const navContainer = document.getElementById('menuNavigation');
+    if (!navContainer) return;
+    
+    navContainer.innerHTML = '';
+    
+    menuCategories.forEach((category, index) => {
+        const button = document.createElement('button');
+        button.className = `menu-cat-btn ${index === 0 ? 'active' : ''}`;
+        button.setAttribute('data-category', category.id);
+        button.textContent = category.title;
+        navContainer.appendChild(button);
+    });
+}
+
+// Generate menu category sections dynamically
+function generateMenuCategories() {
+    const container = document.getElementById('menuCategoriesContainer');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    menuCategories.forEach((category, index) => {
+        const categoryDiv = document.createElement('div');
+        categoryDiv.className = `menu-category ${index === 0 ? 'active' : ''}`;
+        categoryDiv.id = category.id;
+        
+        let categoryHTML = `<h3>${category.title}</h3>`;
+        
+        if (category.description) {
+            categoryHTML += `<p class="menu-description">${category.description}</p>`;
+        }
+        
+        // Handle composite categories differently
+        if (category.isComposite) {
+            if (category.id === 'noodles') {
+                categoryHTML += `
+                    <div class="menu-grid" id="noodleItems"></div>
+                    <div class="menu-grid" id="riceItems"></div>
+                `;
+            } else if (category.id === 'sides') {
+                categoryHTML += `<div class="menu-grid" id="sideItems"></div>`;
+            }
+        } else {
+            // Regular categories
+            const gridClass = 'menu-grid';
+            categoryHTML += `<div class="${gridClass}" id="${category.id}Items"></div>`;
+        }
+        
+        categoryDiv.innerHTML = categoryHTML;
+        container.appendChild(categoryDiv);
+    });
+}
+
+// Setup menu category navigation with smooth scrolling
 function setupMenuNavigation() {
+    const menuCategoryButtons = document.querySelectorAll('.menu-cat-btn');
+    const menuCategoryDivs = document.querySelectorAll('.menu-category');
+    
     menuCategoryButtons.forEach(button => {
         button.addEventListener('click', function() {
             const category = this.dataset.category;
+            const targetSection = document.getElementById(category);
             
             // Update active button
             menuCategoryButtons.forEach(btn => btn.classList.remove('active'));
             this.classList.add('active');
             
-            // Update active category
-            menuCategories.forEach(cat => cat.classList.remove('active'));
-            document.getElementById(category).classList.add('active');
+            // Update active category visually (for CSS styling)
+            menuCategoryDivs.forEach(cat => cat.classList.remove('active'));
+            targetSection.classList.add('active');
+            
+            // Smooth scroll to the category
+            targetSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         });
     });
 }
@@ -61,21 +187,22 @@ function setupSmoothScrolling() {
     });
 }
 
-function populateSpecialties() {
-    const container = document.getElementById('specialtiesItems');
-    if (!container || !menuData.chef_s_specialties) return;
-    
-    container.innerHTML = '';
-    
-    // Filter out note objects and process only menu items
-    const menuItems = menuData.chef_s_specialties.filter(item => item.name);
-    menuItems.forEach(item => {
-        const price = getPrice(item);
-        // For specialties, use the single price value (could be price or large_price)
-        const priceValue = typeof price === 'object' ? (price.large || price.small || price) : price;
-        const specialtyItem = createSpecialtyItem(item.name, item.description, priceValue, isHotDish(item.name));
-        container.appendChild(specialtyItem);
-    });
+// Populate all menu items from JSON data
+function populateAllMenuItems() {
+    if (!menuData) return;
+
+    // Populate all menu categories
+    populateLunchMenu();
+    populateAppetizers();
+    populateSoups();
+    populateSpecialties();
+    populateChickenDishes();
+    populatePorkDishes();
+    populateBeefDishes();
+    populateSeafoodDishes();
+    populateVegetableDishes();
+    populateNoodlesAndRice();
+    populateSides();
 }
 
 function populateLunchMenu() {
@@ -94,14 +221,45 @@ function populateLunchMenu() {
 }
 
 function populateAppetizers() {
-    const container = document.getElementById('appetizerItems');
+    const container = document.getElementById('appetizersItems');
     if (!container || !menuData.appetizers) return;
     
     container.innerHTML = '';
     
-    menuData.appetizers.forEach(item => {
+    // Filter out note objects and process only menu items
+    const menuItems = menuData.appetizers.filter(item => item.name);
+    menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.note, prices, null, false, item.gf);
+        const menuItem = createMenuItem(item.name, item.description, prices, null, false, item.gf);
+        container.appendChild(menuItem);
+    });
+}
+
+function populateSoups() {
+    const container = document.getElementById('soupsItems');
+    if (!container || !menuData.soups) return;
+    
+    container.innerHTML = '';
+    
+    // Filter out note objects and process only menu items
+    const menuItems = menuData.soups.filter(item => item.name);
+    menuItems.forEach(item => {
+        const prices = getPrice(item);
+        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
+        container.appendChild(menuItem);
+    });
+}
+function populateSpecialties() {
+    const container = document.getElementById('specialtiesItems');
+    if (!container || !menuData.chef_s_specialties) return;
+    
+    container.innerHTML = '';
+    
+    // Filter out note objects and process only menu items
+    const menuItems = menuData.chef_s_specialties.filter(item => item.name);
+    menuItems.forEach(item => {
+        const prices = getPrice(item);
+        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
         container.appendChild(menuItem);
     });
 }
@@ -114,6 +272,21 @@ function populateChickenDishes() {
     
     // Filter out note objects and process only menu items
     const menuItems = menuData.chicken.filter(item => item.name);
+    menuItems.forEach(item => {
+        const prices = getPrice(item);
+        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
+        container.appendChild(menuItem);
+    });
+}
+
+function populatePorkDishes() {
+    const container = document.getElementById('porkItems');
+    if (!container || !menuData.pork) return;
+    
+    container.innerHTML = '';
+    
+    // Filter out note objects and process only menu items
+    const menuItems = menuData.pork.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
         const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
@@ -152,7 +325,7 @@ function populateSeafoodDishes() {
 }
 
 function populateVegetableDishes() {
-    const container = document.getElementById('vegetableItems');
+    const container = document.getElementById('vegetablesItems');
     if (!container || !menuData.vegetables) return;
     
     container.innerHTML = '';
@@ -166,83 +339,11 @@ function populateVegetableDishes() {
     });
 }
 
-// Populate menu items from JSON data
+// Populate menu items from JSON data (legacy function - now handled by populateAllMenuItems)
 function populateMenuItems() {
-    if (!menuData) return;
-
-    // Populate all menu categories
-    populateLunchMenu();
-    populateAppetizers();
-    populateSoups();
-    populateSpecialties();
-    populateChickenDishes();
-    populatePorkDishes();
-    populateBeefDishes();
-    populateSeafoodDishes();
-    populateVegetableDishes();
-    populateNoodlesAndRice();
-    populateSides();
+    populateAllMenuItems();
 }
 
-function populateAppetizers() {
-    const container = document.getElementById('appetizerItems');
-    if (!container || !menuData.appetizers) return;
-    
-    container.innerHTML = '';
-    
-    // Filter out note objects and process only menu items
-    const menuItems = menuData.appetizers.filter(item => item.name);
-    menuItems.forEach(item => {
-        const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, false, item.gf);
-        container.appendChild(menuItem);
-    });
-}
-
-function populateSoups() {
-    const container = document.getElementById('soupItems');
-    if (!container || !menuData.soups) return;
-    
-    container.innerHTML = '';
-    
-    // Filter out note objects and process only menu items
-    const menuItems = menuData.soups.filter(item => item.name);
-    menuItems.forEach(item => {
-        const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
-        container.appendChild(menuItem);
-    });
-}
-
-function populatePorkDishes() {
-    const container = document.getElementById('porkItems');
-    if (!container || !menuData.pork) return;
-    
-    container.innerHTML = '';
-    
-    // Filter out note objects and process only menu items
-    const menuItems = menuData.pork.filter(item => item.name);
-    menuItems.forEach(item => {
-        const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
-        container.appendChild(menuItem);
-    });
-}
-
-function populateVegetableDishes() {
-    const container = document.getElementById('vegetableItems');
-    if (!container || !menuData.vegetables) return;
-    
-    container.innerHTML = '';
-    
-    // Filter out note objects and process only menu items
-    const menuItems = menuData.vegetables.filter(item => item.name);
-    menuItems.forEach(item => {
-        const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
-        container.appendChild(menuItem);
-    });
-}
 
 function populateNoodlesAndRice() {
     const noodleContainer = document.getElementById('noodleItems');
@@ -307,64 +408,7 @@ function populateNoodlesAndRice() {
     }
 }
 
-function populateRiceDishes() {
-    const container = document.getElementById('riceItems');
-    if (!container) return;
-    
-    container.innerHTML = '';
-    
-    // Add Fried Rice dishes
-    if (menuData.fried_rice) {
-        const menuItems = menuData.fried_rice.filter(item => item.name);
-        menuItems.forEach(item => {
-            const prices = getPrice(item);
-            const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
-            container.appendChild(menuItem);
-        });
-    }
-    
-    // Add Egg Foo Young dishes
-    if (menuData.egg_foo_young) {
-        const menuItems = menuData.egg_foo_young.filter(item => item.name);
-        menuItems.forEach(item => {
-            const prices = getPrice(item);
-            const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
-            container.appendChild(menuItem);
-        });
-    }
-}
 
-function populateSpecialties() {
-    const container = document.getElementById('specialtiesItems');
-    if (!container || !menuData.chef_s_specialties) return;
-    
-    container.innerHTML = '';
-    
-    // Filter out note objects and process only menu items
-    const menuItems = menuData.chef_s_specialties.filter(item => item.name);
-    menuItems.forEach(item => {
-        const price = getPrice(item);
-        // For specialties, use the single price value (could be price or large_price)
-        const priceValue = typeof price === 'object' ? (price.large || price.small || price) : price;
-        const specialtyItem = createSpecialtyItem(item.name, item.description, priceValue, isHotDish(item.name));
-        container.appendChild(specialtyItem);
-    });
-}
-
-function populateWeightWatchers() {
-    const container = document.getElementById('weightWatchersItems');
-    if (!container || !menuData.weight_watchers_menu) return;
-    
-    container.innerHTML = '';
-    
-    // Filter out note objects and process only menu items
-    const menuItems = menuData.weight_watchers_menu.filter(item => item.name);
-    menuItems.forEach(item => {
-        const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
-        container.appendChild(menuItem);
-    });
-}
 
 function populateSides() {
     const container = document.getElementById('sideItems');
@@ -444,12 +488,7 @@ function createMenuItem(name, description, price, note, isHot, isGlutenFree = fa
     
     let priceHTML = '';
     if (typeof price === 'object' && price && price.small && price.large) {
-        priceHTML = `
-            <div class="menu-item-prices">
-                <span class="price-option">Small $${(price.small || 0).toFixed(2)}</span>
-                <span class="price-option">Large $${(price.large || 0).toFixed(2)}</span>
-            </div>
-        `;
+        priceHTML = `<span class="menu-item-price">$${(price.small || 0).toFixed(2)} / $${(price.large || 0).toFixed(2)}</span>`;
     } else if (price !== undefined && price !== null) {
         priceHTML = `<span class="menu-item-price">$${(price || 0).toFixed(2)}</span>`;
     } else {
@@ -552,37 +591,63 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Add loading state for menu
 function showMenuLoading() {
-    const menuContainers = [
-        'lunchItems', 'appetizerItems', 'soupItems', 'specialtiesItems', 
-        'chickenItems', 'porkItems', 'beefItems', 'seafoodItems', 
-        'vegetableItems', 'noodleItems', 'riceItems'
-    ];
+    const container = document.getElementById('menuCategoriesContainer');
+    if (container) {
+        container.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--gray-medium);">Loading menu items...</div>';
+    }
     
-    menuContainers.forEach(containerId => {
-        const container = document.getElementById(containerId);
-        if (container) {
-            container.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--gray-medium);">Loading menu items...</div>';
-        }
-    });
+    const navContainer = document.getElementById('menuNavigation');
+    if (navContainer) {
+        navContainer.innerHTML = '<div style="text-align: center; padding: 1rem; color: var(--gray-medium);">Loading navigation...</div>';
+    }
 }
 
-// Show loading state initially
-document.addEventListener('DOMContentLoaded', function() {
-    showMenuLoading();
-});
+
 
 // Add error handling for menu loading
 function showMenuError() {
-    const menuContainers = [
-        'lunchItems', 'appetizerItems', 'soupItems', 'specialtiesItems', 
-        'chickenItems', 'porkItems', 'beefItems', 'seafoodItems', 
-        'vegetableItems', 'noodleItems', 'riceItems'
-    ];
+    const container = document.getElementById('menuCategoriesContainer');
+    if (container) {
+        container.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--primary-red);">Error loading menu. Please refresh the page.<br><small>Check browser console for details.</small></div>';
+    }
     
-    menuContainers.forEach(containerId => {
-        const container = document.getElementById(containerId);
-        if (container) {
-            container.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--primary-red);">Error loading menu. Please refresh the page.<br><small>Check browser console for details.</small></div>';
-        }
-    });
+    const navContainer = document.getElementById('menuNavigation');
+    if (navContainer) {
+        navContainer.innerHTML = '<div style="text-align: center; padding: 1rem; color: var(--primary-red);">Error loading navigation.</div>';
+    }
 }
+
+// Back to Top Button Functionality
+function setupBackToTopButton() {
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    if (!backToTopBtn) return;
+
+    // Show/hide button based on scroll position
+    function toggleBackToTopButton() {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    }
+
+    // Smooth scroll to top
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // Event listeners
+    window.addEventListener('scroll', toggleBackToTopButton);
+    backToTopBtn.addEventListener('click', scrollToTop);
+    
+    // Initial check
+    toggleBackToTopButton();
+}
+
+// Initialize back to top button when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    setupBackToTopButton();
+});

@@ -13,19 +13,37 @@
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <div class="logo">
-                <h1>CHINA CAFE</h1>
+            <div class="header-content">
+                <div class="logo">
+                    <h1>CHINA CAFE</h1>
+                </div>
+                <div class="header-info">
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <span class="info-label">Hours</span>
+                            <span class="info-value">Tue-Fri: 11AM-8PM | Sat-Sun: 12PM-8PM | <span class="closed">Mon: CLOSED</span></span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <span class="info-label">Location</span>
+                            <span class="info-value">319 Broadway, South Haven, MI 49090</span>
+                        </div>
+                    </div>
+                </div>
+                <nav class="nav">
+                    <a href="tel:2696378591" class="btn btn-secondary">
+                        <i class="fas fa-phone"></i> Order Now
+                    </a>
+                </nav>
             </div>
-            <nav class="nav">
-                <a href="tel:2696378591" class="btn btn-secondary">
-                    <i class="fas fa-phone"></i> Order Now
-                </a>
-            </nav>
         </div>
     </header>
 
-    <!-- Restaurant Info Section -->
-    <section id="home" class="info-section">
+    <!-- Restaurant Info Section (Mobile Only) -->
+    <section id="home" class="info-section mobile-only">
         <div class="container">
             <div class="restaurant-info">
                 <div class="info-grid">
@@ -61,86 +79,13 @@
             <h2 class="section-title">Our Menu</h2>
             
             <!-- Menu Navigation -->
-            <div class="menu-nav">
-                <button class="menu-cat-btn active" data-category="lunch">Lunch Specials</button>
-                <button class="menu-cat-btn" data-category="appetizers">Appetizers</button>
-                <button class="menu-cat-btn" data-category="soups">Soups</button>
-                <button class="menu-cat-btn" data-category="specialties">Chef's Specialties</button>
-                <button class="menu-cat-btn" data-category="chicken">Chicken</button>
-                <button class="menu-cat-btn" data-category="pork">Pork</button>
-                <button class="menu-cat-btn" data-category="beef">Beef</button>
-                <button class="menu-cat-btn" data-category="seafood">Seafood</button>
-                <button class="menu-cat-btn" data-category="vegetables">Vegetables</button>
-                <button class="menu-cat-btn" data-category="noodles">Noodles & Rice</button>
-                <button class="menu-cat-btn" data-category="sides">Sides</button>
+            <div class="menu-nav" id="menuNavigation">
+                <!-- Navigation buttons will be dynamically generated -->
             </div>
 
-            <!-- Lunch Menu -->
-            <div class="menu-category active" id="lunch">
-                <h3>Lunch Special Menu</h3>
-                <p class="menu-description">Available 11:00 AM to 3:30 PM • Served with Steamed Rice, Pork Fried Rice, Spring Roll</p>
-                <div class="menu-grid" id="lunchItems"></div>
-            </div>
-
-            <!-- Appetizers -->
-            <div class="menu-category" id="appetizers">
-                <h3>Appetizers</h3>
-                <div class="menu-grid" id="appetizerItems"></div>
-            </div>
-
-            <!-- Soups -->
-            <div class="menu-category" id="soups">
-                <h3>Soups</h3>
-                <div class="menu-grid" id="soupItems"></div>
-            </div>
-
-            <!-- Chef's Specialties -->
-            <div class="menu-category" id="specialties">
-                <h3>Chef's Specialties</h3>
-                <div class="specialties-grid" id="specialtiesItems"></div>
-            </div>
-
-            <!-- Chicken -->
-            <div class="menu-category" id="chicken">
-                <h3>Chicken Dishes</h3>
-                <div class="menu-grid" id="chickenItems"></div>
-            </div>
-
-            <!-- Pork -->
-            <div class="menu-category" id="pork">
-                <h3>Pork Dishes</h3>
-                <div class="menu-grid" id="porkItems"></div>
-            </div>
-
-            <!-- Beef -->
-            <div class="menu-category" id="beef">
-                <h3>Beef Dishes</h3>
-                <div class="menu-grid" id="beefItems"></div>
-            </div>
-
-            <!-- Seafood -->
-            <div class="menu-category" id="seafood">
-                <h3>Seafood Dishes</h3>
-                <div class="menu-grid" id="seafoodItems"></div>
-            </div>
-
-            <!-- Vegetables -->
-            <div class="menu-category" id="vegetables">
-                <h3>Vegetable Dishes</h3>
-                <div class="menu-grid" id="vegetableItems"></div>
-            </div>
-
-            <!-- Noodles & Rice -->
-            <div class="menu-category" id="noodles">
-                <h3>Noodles & Rice</h3>
-                <div class="menu-grid" id="noodleItems"></div>
-                <div class="menu-grid" id="riceItems"></div>
-            </div>
-
-            <!-- Sides -->
-            <div class="menu-category" id="sides">
-                <h3>Sides</h3>
-                <div class="menu-grid" id="sideItems"></div>
+            <!-- Menu Categories Container -->
+            <div class="menu-categories" id="menuCategoriesContainer">
+                <!-- All menu categories will be dynamically generated and rendered -->
             </div>
         </div>
     </section>
@@ -151,7 +96,6 @@
             <div class="footer-content">
                 <div class="footer-logo">
                     <h3>CHINA CAFE</h3>
-                    <p>Authentic Chinese Cuisine</p>
                 </div>
                 <div class="footer-info">
                     <p>&copy; 2025 China Cafe. All rights reserved.</p>
@@ -160,6 +104,11 @@
             </div>
         </div>
     </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTopBtn" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
 
     <script src="script.js"></script>
 </body>
