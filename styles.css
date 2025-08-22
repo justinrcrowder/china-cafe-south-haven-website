@@ -375,7 +375,7 @@ body {
 .section-title {
     text-align: center;
     font-size: 2.5rem;
-    color: var(--primary-red);
+    color: var(--primary-green);
     margin-bottom: 3rem;
     font-family: var(--font-primary);
     font-weight: 600;
@@ -391,9 +391,9 @@ body {
 
 .menu-cat-btn {
     padding: 0.75rem 1.25rem;
-    border: 2px solid var(--primary-red);
+    border: 2px solid var(--primary-green);
     background: var(--white);
-    color: var(--primary-red);
+    color: var(--primary-green);
     border-radius: var(--border-radius);
     cursor: pointer;
     transition: all 0.3s ease;
@@ -402,7 +402,7 @@ body {
 }
 
 .menu-cat-btn.active, .menu-cat-btn:hover {
-    background: var(--primary-red);
+    background: var(--primary-green);
     color: var(--white);
     transform: translateY(-1px);
     box-shadow: var(--shadow);
@@ -428,7 +428,7 @@ body {
 }
 
 .menu-category h3 {
-    color: var(--primary-red);
+    color: var(--primary-green);
     font-size: 2rem;
     margin-bottom: 1rem;
     text-align: center;
@@ -797,6 +797,48 @@ body {
     }
 }
 
+/* Small mobile phone adjustments */
+@media (min-width: 350px) {
+    .header-content {
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+    }
+    
+    .logo h1 {
+        font-size: 1.4rem;
+    }
+    
+    .logo .tagline {
+        display: none; /* Hide tagline on very small screens */
+    }
+    
+    .nav .btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Mobile phone adjustments */
+@media (min-width: 480px) {
+    .header-content {
+        flex-wrap: nowrap;
+        gap: 1rem;
+    }
+    
+    .logo h1 {
+        font-size: 1.6rem;
+    }
+    
+    .logo .tagline {
+        display: block; /* Show tagline again */
+    }
+    
+    .nav .btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
 /* Tablet Styles */
 @media (min-width: 768px) {
     /* Hide mobile navigation on desktop */
@@ -816,6 +858,11 @@ body {
     
     .header {
         padding: 1.25rem 0;
+    }
+    
+    .header-content {
+        flex-wrap: nowrap;
+        gap: 1.5rem;
     }
     
     .header-info {
