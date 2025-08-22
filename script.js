@@ -118,7 +118,8 @@ async function loadMenuData() {
 function generateMenuNavigation() {
     const navContainer = document.getElementById('menuNavigation');
     const mobileNavSelect = document.getElementById('mobileNavSelect');
-    if (!navContainer && !mobileNavSelect) return;
+    const mobileNavButtons = document.getElementById('mobileNavButtons');
+    if (!navContainer && !mobileNavSelect && !mobileNavButtons) return;
     
     // Clear existing content
     if (navContainer) navContainer.innerHTML = '';
@@ -128,6 +129,7 @@ function generateMenuNavigation() {
         mobileNavSelect.innerHTML = '';
         if (firstOption) mobileNavSelect.appendChild(firstOption);
     }
+    if (mobileNavButtons) mobileNavButtons.innerHTML = '';
     
     menuCategories.forEach((category, index) => {
         // Generate desktop navigation buttons
@@ -139,12 +141,21 @@ function generateMenuNavigation() {
             navContainer.appendChild(button);
         }
         
-        // Generate mobile navigation options
+        // Generate mobile navigation options (keeping for backward compatibility)
         if (mobileNavSelect) {
             const option = document.createElement('option');
             option.value = category.id;
             option.textContent = category.title;
             mobileNavSelect.appendChild(option);
+        }
+        
+        // Generate mobile scroll navigation buttons
+        if (mobileNavButtons) {
+            const button = document.createElement('button');
+            button.className = 'mobile-nav-btn';
+            button.setAttribute('data-category', category.id);
+            button.textContent = category.title;
+            mobileNavButtons.appendChild(button);
         }
     });
 }
@@ -195,6 +206,33 @@ function setupMenuNavigation() {
     const menuCategoryButtons = document.querySelectorAll('.menu-cat-btn');
     const menuCategoryDivs = document.querySelectorAll('.menu-category');
     const mobileNavSelect = document.getElementById('mobileNavSelect');
+    const mobileNavButtons = document.querySelectorAll('.mobile-nav-btn');
+    const mobileScrollNav = document.getElementById('mobileScrollNav');
+    const scrollHint = document.querySelector('.scroll-hint');
+    
+    // Hide scroll hint after user interacts with mobile navigation
+    let hintHidden = false;
+    function hideScrollHint() {
+        if (!hintHidden && scrollHint) {
+            hintHidden = true;
+            scrollHint.style.transition = 'all 0.3s ease-out';
+            scrollHint.style.opacity = '0';
+            scrollHint.style.height = '0';
+            scrollHint.style.marginBottom = '0';
+            scrollHint.style.paddingTop = '0';
+            scrollHint.style.paddingBottom = '0';
+            setTimeout(() => {
+                if (scrollHint && scrollHint.parentNode) {
+                    scrollHint.parentNode.removeChild(scrollHint);
+                }
+            }, 300);
+        }
+    }
+    
+    // Hide hint on scroll
+    if (mobileScrollNav) {
+        mobileScrollNav.addEventListener('scroll', hideScrollHint, { once: true });
+    }
     
     // Desktop navigation
     menuCategoryButtons.forEach(button => {
@@ -212,22 +250,27 @@ function setupMenuNavigation() {
             
             // Smooth scroll to the category with header offset
             if (targetSection) {
-                const header = document.querySelector('.header');
-                const headerHeight = header ? header.offsetHeight : 80; // fallback to 80px
-                const offset = headerHeight + 20; // extra 20px padding
-                
-                const elementPosition = targetSection.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - offset;
-                
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
+                scrollToSection(targetSection);
             }
         });
     });
     
-    // Mobile navigation
+    // Mobile scroll navigation
+    mobileNavButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const category = this.dataset.category;
+            const targetSection = document.getElementById(category);
+            
+            // Hide hint on first button click
+            hideScrollHint();
+            
+            if (targetSection) {
+                scrollToSection(targetSection);
+            }
+        });
+    });
+    
+    // Mobile dropdown navigation (keeping for backward compatibility)
     if (mobileNavSelect) {
         mobileNavSelect.addEventListener('change', function() {
             const category = this.value;
@@ -236,18 +279,7 @@ function setupMenuNavigation() {
             const targetSection = document.getElementById(category);
             if (!targetSection) return;
             
-            // Smooth scroll to the category with header offset
-            const header = document.querySelector('.header');
-            const headerHeight = header ? header.offsetHeight : 80; // fallback to 80px
-            const offset = headerHeight + 20; // extra 20px padding
-            
-            const elementPosition = targetSection.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - offset;
-            
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
+            scrollToSection(targetSection);
             
             // Reset select to default option after scrolling
             setTimeout(() => {
@@ -255,6 +287,21 @@ function setupMenuNavigation() {
             }, 500);
         });
     }
+}
+
+// Helper function for consistent scrolling behavior
+function scrollToSection(targetSection) {
+    const header = document.querySelector('.header');
+    const headerHeight = header ? header.offsetHeight : 80; // fallback to 80px
+    const offset = headerHeight + 20; // extra 20px padding
+    
+    const elementPosition = targetSection.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - offset;
+    
+    window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+    });
 }
 
 // Setup smooth scrolling for anchor links

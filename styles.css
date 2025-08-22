@@ -49,7 +49,9 @@ body {
 
 /* Header */
 .header {
-    background: linear-gradient(135deg, var(--dark-green) 0%, var(--forest-green) 100%);
+    background: 
+        linear-gradient(135deg, rgba(47, 79, 47, 0.9) 0%, rgba(27, 59, 27, 0.95) 100%),
+        url('china-cafe-exterior.png') center/cover no-repeat;
     color: var(--white);
     padding: 1rem 0;
     position: fixed;
@@ -66,6 +68,66 @@ body {
     align-items: center;
     gap: 2rem;
     flex-wrap: wrap;
+}
+
+/* Hero Section */
+.hero {
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+        url('china-cafe-exterior.png') center/cover no-repeat;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+    margin-top: 80px; /* Account for fixed header */
+    position: relative;
+}
+
+.hero-overlay {
+    background: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 0;
+}
+
+.hero-content {
+    max-width: 600px;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    font-family: var(--font-secondary);
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    opacity: 0.95;
+}
+
+.hero-btn {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.hero-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .logo h1 {
@@ -675,36 +737,100 @@ body {
         display: none;
     }
     
-    /* Mobile menu navigation */
+    /* Hide mobile dropdown navigation */
     .mobile-menu-nav {
+        display: none;
+    }
+    
+    /* Mobile horizontal scroll navigation */
+    .mobile-scroll-nav {
         display: block;
         margin-bottom: 2rem;
-    }
-    
-    .mobile-nav-select {
-        width: 100%;
-        padding: 1rem;
-        border: 2px solid var(--primary-red);
-        border-radius: var(--border-radius);
-        background: var(--white);
-        color: var(--gray-dark);
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        appearance: none;
-        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DC143C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
-        background-repeat: no-repeat;
-        background-position: right 1rem center;
-        background-size: 1rem;
-        padding-right: 3rem;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
         position: relative;
-        z-index: 10; /* Lower than back-to-top button */
+        padding: 0.5rem 0;
+        /* Slightly cut off edges to indicate scrollability */
+        margin-left: -0.5rem;
+        margin-right: -0.5rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        border: none;
+        background: transparent;
     }
     
-    .mobile-nav-select:focus {
-        outline: none;
-        border-color: var(--warm-red);
-        box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.1);
+    .mobile-scroll-nav::-webkit-scrollbar {
+        display: none; /* Chrome/Safari */
+    }
+    
+    .mobile-nav-buttons {
+        display: flex;
+        gap: 0.5rem;
+        padding: 0.5rem 0;
+        min-width: max-content;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    /* Scroll hint styling */
+    .scroll-hint {
+        text-align: center;
+        margin-bottom: 0.5rem;
+        color: var(--gray-medium);
+        font-size: 0.8rem;
+        opacity: 0.8;
+        animation: fadeInOut 3s ease-in-out infinite;
+        border: none;
+        background: none;
+        padding: 0;
+        height: auto;
+        position: relative;
+    }
+    
+    .scroll-hint-icon {
+        margin-left: 0.5rem;
+        animation: bounce 2s ease-in-out infinite;
+    }
+    
+    /* Ensure no visual artifacts when hint is removed */
+    .mobile-scroll-nav:not(:has(.scroll-hint)) .mobile-nav-buttons,
+    .mobile-scroll-nav .mobile-nav-buttons {
+        margin-top: 0;
+        padding-top: 0.5rem;
+    }
+    
+    @keyframes fadeInOut {
+        0%, 100% { opacity: 0.5; }
+        50% { opacity: 0.8; }
+    }
+    
+    @keyframes bounce {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-3px); }
+        75% { transform: translateX(3px); }
+    }
+    
+    .mobile-nav-btn {
+        padding: 0.75rem 1rem;
+        border: 2px solid var(--primary-red);
+        background: var(--white);
+        color: var(--primary-red);
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        font-size: 0.85rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    
+    .mobile-nav-btn:active {
+        background: var(--primary-red);
+        color: var(--white);
+        transform: scale(0.98);
     }
     
     /* Show all categories on mobile for full menu display */
@@ -712,12 +838,36 @@ body {
         display: block !important;
         margin-bottom: 3rem;
     }
+    
+    /* Hero section mobile styles */
+    .hero {
+        min-height: 50vh;
+        margin-top: 70px; /* Smaller header on mobile */
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .hero-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
 }
 
 /* Tablet Styles */
 @media (min-width: 768px) {
     /* Hide mobile navigation on desktop */
     .mobile-menu-nav {
+        display: none;
+    }
+    
+    /* Hide mobile scroll navigation on desktop */
+    .mobile-scroll-nav {
         display: none;
     }
     
