@@ -38,7 +38,7 @@ body {
     font-family: var(--font-primary);
     line-height: 1.6;
     color: var(--gray-dark);
-    background-color: var(--white);
+    background: linear-gradient(135deg, var(--dark-green) 0%, var(--forest-green) 100%);
     overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
@@ -170,17 +170,17 @@ html {
     align-items: flex-start;
     gap: 1rem;
     padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, var(--dark-green) 0%, var(--forest-green) 100%);
+    color: var(--white);
     border-radius: var(--border-radius);
     text-align: left;
-    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .info-card:hover {
     transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.15);
+    background: linear-gradient(135deg, var(--forest-green) 0%, var(--dark-green) 100%);
 }
 
 .info-card i {
@@ -359,7 +359,7 @@ html {
 /* Menu Section */
 .menu-section {
     margin-top: 0; /* No margin on mobile since info section provides spacing */
-    padding: var(--section-padding);
+    padding: 2rem 0 0 0; /* Remove bottom padding completely */
     background: var(--white);
     position: relative;
 }
@@ -370,7 +370,7 @@ html {
         linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.9)),
         url('china-cafe-exterior.png') center/cover no-repeat;
     padding: 3rem 0;
-    margin-bottom: 2rem;
+    margin-bottom: 0; /* Remove bottom margin to reduce whitespace */
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     width: 100vw;
@@ -415,16 +415,31 @@ html {
     box-shadow: var(--shadow);
 }
 
+/* Menu Categories Section */
+.menu-categories-section {
+    padding: 0; /* Remove all padding to eliminate whitespace */
+    background: var(--white);
+}
+
 .menu-category {
     display: block;
     margin-bottom: 1.5rem; /* Reduce from 3rem */
-    padding: 2rem 0;
+    padding: 2rem;
     scroll-margin-top: 120px; /* Account for fixed header */
-    border-bottom: 1px solid var(--gray-light);
+    background: var(--white);
+    border-radius: var(--border-radius);
+    border: 2px solid var(--gray-light);
+    box-shadow: var(--shadow);
+}
+
+.menu-category:first-child {
+    margin-top: 0; /* Remove any top margin from first category */
+    background: rgba(220, 20, 60, 0.02); /* Red-tinted background for lunch specials */
+    border: 2px solid rgba(220, 20, 60, 0.2); /* Red-tinted border for lunch specials */
 }
 
 .menu-category:last-child {
-    border-bottom: none;
+    border-bottom: 2px solid var(--gray-light);
 }
 
 .menu-category.active {
@@ -780,10 +795,12 @@ html {
     /* Dragon decorative break */
     .dragon-break.mobile-only {
         padding: 0;
-        background: url('dragon-mobile-image.png') repeat-x center/auto 40px;
+        background: 
+            url('dragon-mobile-image.png') repeat-x center/auto 30px,
+            linear-gradient(135deg, var(--dark-green) 0%, var(--forest-green) 100%);
         display: block;
         margin: 0; /* Remove all margins for seamless blend */
-        height: 50px;
+        height: 35px; /* Reduce height from 50px to 35px */
         /* Remove shadows and borders for seamless blend with white background */
     }
     
@@ -905,6 +922,16 @@ html {
     .menu-category {
         display: block !important;
         margin-bottom: 1.5rem; /* Reduce from 3rem */
+        background: var(--white);
+        border-radius: var(--border-radius);
+        border: 2px solid var(--gray-light);
+        box-shadow: var(--shadow);
+        padding: 2rem;
+    }
+    
+    .menu-category:first-child {
+        background: rgba(220, 20, 60, 0.02); /* Red-tinted background for lunch specials */
+        border: 2px solid rgba(220, 20, 60, 0.2); /* Red-tinted border for lunch specials */
     }
 }
 
