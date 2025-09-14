@@ -384,8 +384,8 @@ html {
 
 .section-title {
     text-align: center;
-    font-size: 2.5rem;
-    color: var(--primary-red);
+    font-size: 3rem;
+    color: var(--black);
     margin-bottom: 3rem;
     font-family: var(--font-primary);
     font-weight: 600;
@@ -401,9 +401,9 @@ html {
 
 .menu-cat-btn {
     padding: 0.75rem 1.25rem;
-    border: 2px solid var(--primary-red);
+    border: 2px solid var(--black);
     background: var(--white);
-    color: var(--primary-red);
+    color: var(--black);
     border-radius: var(--border-radius);
     cursor: pointer;
     transition: all 0.3s ease;
@@ -412,7 +412,7 @@ html {
 }
 
 .menu-cat-btn.active, .menu-cat-btn:hover {
-    background: var(--primary-red);
+    background: var(--black);
     color: var(--white);
     transform: translateY(-1px);
     box-shadow: var(--shadow);
@@ -454,8 +454,8 @@ html {
 }
 
 .menu-category h3 {
-    color: var(--primary-red);
-    font-size: 2rem;
+    color: var(--black);
+    font-size: 2.5rem;
     margin-bottom: 1rem;
     text-align: center;
     font-weight: 600;
@@ -544,7 +544,7 @@ html {
 }
 
 .specialty-item h4 {
-    color: var(--primary-red);
+    color: var(--black);
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
     font-weight: 600;
@@ -558,7 +558,7 @@ html {
 }
 
 .specialty-price {
-    color: var(--dark-green);
+    color: var(--black);
     font-size: 1.2rem;
     font-weight: 700;
 }
@@ -573,7 +573,7 @@ html {
 }
 
 .menu-item-name {
-    color: var(--dark-green);
+    color: var(--black);
     font-weight: 600;
     font-size: 1rem;
     flex: 1;
@@ -600,7 +600,7 @@ html {
 }
 
 .menu-item-price {
-    color: var(--primary-red);
+    color: var(--black);
     font-weight: 700;
     font-size: 1rem;
 }
@@ -612,7 +612,7 @@ html {
 }
 
 .price-option {
-    background: var(--primary-red);
+    background: var(--black);
     color: var(--white);
     padding: 0.125rem 0.5rem;
     border-radius: 12px;
@@ -719,7 +719,7 @@ html {
     }
     
     .section-title {
-        font-size: 1.75rem; /* Reduce from 2.5rem */
+        font-size: 2.25rem; /* Increase from 1.75rem */
         margin-bottom: 1rem; /* Reduce from 3rem */
     }
     
@@ -729,7 +729,7 @@ html {
     }
     
     .menu-category h3 {
-        font-size: 1.4rem; /* Reduce from 2rem */
+        font-size: 1.8rem; /* Increase from 1.4rem */
         margin-bottom: 0.5rem; /* Reduce from 1rem */
     }
     
@@ -888,9 +888,9 @@ html {
     
     .mobile-nav-btn {
         padding: 0.75rem 1rem;
-        border: 2px solid var(--primary-red);
+        border: 2px solid var(--black);
         background: var(--white);
-        color: var(--primary-red);
+        color: var(--black);
         border-radius: var(--border-radius);
         cursor: pointer;
         transition: all 0.3s ease;
@@ -901,7 +901,7 @@ html {
     }
     
     .mobile-nav-btn:active {
-        background: var(--primary-red);
+        background: var(--black);
         color: var(--white);
         transform: scale(0.98);
     }
