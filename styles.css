@@ -6,16 +6,15 @@
 }
 
 :root {
-    /* Colors inspired by China Cafe exterior and menu */
+    /* Red, Black, White, and Green Color Scheme */
     --primary-red: #DC143C;
-    --primary-yellow: #FFD700;
+    --dark-red: #B22222;
+    --darker-red: #8B0000;
+    --light-red: #FFB6C1;
     --primary-green: #228B22;
     --dark-green: #2F4F2F;
     --forest-green: #1B3B1B;
     --light-green: #90EE90;
-    --warm-red: #B22222;
-    --golden-yellow: #DAA520;
-    --cream: #FFF8DC;
     --white: #FFFFFF;
     --black: #000000;
     --gray-light: #F8F9FA;
@@ -76,7 +75,7 @@ html {
 .logo h1 {
     font-size: 1.8rem;
     font-weight: 700;
-    color: var(--primary-yellow);
+    color: var(--white);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     margin: 0;
     line-height: 1;
@@ -106,7 +105,7 @@ html {
 }
 
 .info-item i {
-    color: var(--primary-yellow);
+    color: var(--white);
     font-size: 1rem;
     flex-shrink: 0;
 }
@@ -119,7 +118,7 @@ html {
 
 .info-label {
     font-size: 0.75rem;
-    color: var(--primary-yellow);
+    color: var(--white);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -184,14 +183,14 @@ html {
 }
 
 .info-card i {
-    color: var(--primary-yellow);
+    color: var(--white);
     font-size: 1.5rem;
     margin-top: 0.2rem;
     flex-shrink: 0;
 }
 
 .info-card h4 {
-    color: var(--primary-yellow);
+    color: var(--white);
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
     font-weight: 600;
@@ -217,7 +216,7 @@ html {
 }
 
 .info-card a:hover {
-    color: var(--primary-yellow);
+    color: var(--white);
 }
 
 /* Restaurant Info Section */
@@ -236,7 +235,7 @@ html {
 
 .restaurant-info h2 {
     font-size: 3rem;
-    color: var(--primary-yellow);
+    color: var(--white);
     margin-bottom: 0.5rem;
     font-family: var(--font-secondary);
     font-weight: 700;
@@ -279,14 +278,14 @@ html {
 }
 
 .info-card i {
-    color: var(--primary-yellow);
+    color: var(--white);
     font-size: 1.5rem;
     margin-top: 0.2rem;
     flex-shrink: 0;
 }
 
 .info-card h4 {
-    color: var(--primary-yellow);
+    color: var(--white);
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
     font-weight: 600;
@@ -312,7 +311,7 @@ html {
 }
 
 .info-card a:hover {
-    color: var(--primary-yellow);
+    color: var(--white);
 }
 
 /* Buttons */
@@ -332,7 +331,7 @@ html {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+    background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
     color: var(--white);
 }
 
@@ -342,11 +341,14 @@ html {
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, var(--primary-yellow) 0%, var(--golden-yellow) 100%);
-    color: var(--gray-dark);
+    background: var(--white);
+    color: var(--primary-red);
+    border: 2px solid var(--primary-red);
 }
 
 .btn-secondary:hover {
+    background: var(--primary-red);
+    color: var(--white);
     transform: translateY(-2px);
     box-shadow: var(--shadow-hover);
 }
@@ -362,6 +364,7 @@ html {
     padding: 2rem 0 0 0; /* Remove bottom padding completely */
     background: var(--white);
     position: relative;
+    margin-bottom: 0; /* Ensure no bottom margin */
 }
 
 /* Menu Header with Background */
@@ -369,7 +372,7 @@ html {
     background: 
         linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.9)),
         url('china-cafe-exterior.png') center/cover no-repeat;
-    padding: 3rem 0;
+    padding: 3rem 0 1rem 0; /* Add bottom padding to extend white background */
     margin-bottom: 0; /* Remove bottom margin to reduce whitespace */
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
@@ -382,7 +385,7 @@ html {
 .section-title {
     text-align: center;
     font-size: 2.5rem;
-    color: var(--primary-green);
+    color: var(--primary-red);
     margin-bottom: 3rem;
     font-family: var(--font-primary);
     font-weight: 600;
@@ -398,9 +401,9 @@ html {
 
 .menu-cat-btn {
     padding: 0.75rem 1.25rem;
-    border: 2px solid var(--primary-green);
+    border: 2px solid var(--primary-red);
     background: var(--white);
-    color: var(--primary-green);
+    color: var(--primary-red);
     border-radius: var(--border-radius);
     cursor: pointer;
     transition: all 0.3s ease;
@@ -409,7 +412,7 @@ html {
 }
 
 .menu-cat-btn.active, .menu-cat-btn:hover {
-    background: var(--primary-green);
+    background: var(--primary-red);
     color: var(--white);
     transform: translateY(-1px);
     box-shadow: var(--shadow);
@@ -417,8 +420,9 @@ html {
 
 /* Menu Categories Section */
 .menu-categories-section {
-    padding: 0; /* Remove all padding to eliminate whitespace */
+    padding: 1rem 0 0 0; /* Add top padding to extend white background */
     background: var(--white);
+    margin-top: -1rem; /* Negative margin to overlap and eliminate gap */
 }
 
 .menu-category {
@@ -450,7 +454,7 @@ html {
 }
 
 .menu-category h3 {
-    color: var(--primary-green);
+    color: var(--primary-red);
     font-size: 2rem;
     margin-bottom: 1rem;
     text-align: center;
@@ -738,7 +742,7 @@ html {
     }
     
     .mobile-scroll-nav {
-        margin-bottom: 1rem; /* Reduce from 2rem */
+        margin-bottom: 0; /* Remove bottom margin to eliminate green gap */
         padding: 0.25rem 0; /* Reduce from 0.5rem */
     }
     
@@ -790,22 +794,6 @@ html {
     .info-section.mobile-only .info-card a {
         font-size: 0.9rem;
         font-weight: 600;
-    }
-    
-    /* Dragon decorative break */
-    .dragon-break.mobile-only {
-        padding: 0;
-        background: 
-            url('dragon-mobile-image.png') repeat-x center/auto 30px,
-            linear-gradient(135deg, var(--dark-green) 0%, var(--forest-green) 100%);
-        display: block;
-        margin: 0; /* Remove all margins for seamless blend */
-        height: 35px; /* Reduce height from 50px to 35px */
-        /* Remove shadows and borders for seamless blend with white background */
-    }
-    
-    .dragon-image {
-        display: none; /* Hide the img element since we're using background */
     }
     
     .back-to-top {
@@ -994,11 +982,6 @@ html {
         display: none;
     }
     
-    /* Hide dragon break on tablet and larger */
-    .dragon-break.mobile-only {
-        display: none;
-    }
-    
     .header {
         padding: 1.25rem 0;
     }
@@ -1096,20 +1079,20 @@ html {
     .nav .btn {
         padding: 1rem 2rem;
         font-size: 1rem;
-        background: linear-gradient(135deg, var(--primary-yellow) 0%, var(--golden-yellow) 100%);
-        color: var(--dark-green);
-        border: 2px solid transparent;
-        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        background: var(--white);
+        color: var(--primary-red);
+        border: 2px solid var(--primary-red);
+        box-shadow: 0 4px 15px rgba(220, 20, 60, 0.2);
         transition: all 0.3s ease;
         font-weight: 700;
     }
     
     .nav .btn:hover {
-        background: linear-gradient(135deg, var(--golden-yellow) 0%, var(--primary-yellow) 100%);
-        border: 2px solid var(--white);
+        background: var(--primary-red);
+        color: var(--white);
+        border: 2px solid var(--primary-red);
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
-        color: var(--forest-green);
+        box-shadow: 0 6px 20px rgba(220, 20, 60, 0.3);
     }
     
     /* Update menu section margin for desktop */
