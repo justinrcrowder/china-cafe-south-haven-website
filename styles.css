@@ -140,6 +140,15 @@ html {
     align-items: center;
 }
 
+/* Dragon image next to logo (mobile only) */
+.logo-dragon {
+    display: none; /* hidden by default, shown on small screens */
+    width: 36px;
+    height: auto;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
 /* Mobile Info Section */
 .info-section.mobile-only {
     display: block;
@@ -750,6 +759,33 @@ html {
         margin-top: 70px; /* Restore top margin */
         padding: 1rem 0; /* Restore bottom padding for spacing */
         margin-bottom: 0; /* Ensure no bottom margin */
+    }
+
+    /* Show the dragon next to logo on mobile */
+    .logo-dragon {
+        display: inline-block;
+        width: 64px; /* increased width for better visibility on mobile */
+        height: auto;
+        margin-left: 0.5rem;
+    }
+
+    /* Ensure header content stays compact and the logo + dragon align */
+    .header-content {
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    /* Cap the dragon size on very small phones to avoid overflow */
+    @media (max-width: 350px) {
+        .logo-dragon {
+            width: 44px;
+        }
     }
     
     /* Make info cards much more compact on mobile */
