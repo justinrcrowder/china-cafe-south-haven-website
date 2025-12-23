@@ -107,12 +107,53 @@ async function loadMenuData() {
         generateMenuNavigation();
         generateMenuCategories();
         populateAllMenuItems();
+            // After populating items, add size legends where appropriate
+            addSizeLegends();
         setupMenuNavigation();
     } catch (error) {
         console.error('Error loading menu data:', error);
         showMenuError();
     }
 }
+
+    // Add size legends (e.g., Pint / Quart) to categories that have items with two prices
+    function addSizeLegends() {
+        if (!menuData) return;
+
+        menuCategories.forEach(category => {
+            if (category.isComposite && category.id === 'sides_extras') {
+                // side_orders
+                const sideItems = menuData.side_orders ? menuData.side_orders.filter(i => i.name) : [];
+                const extraItems = menuData.extra ? menuData.extra.filter(i => i.name) : [];
+                setLegendForContainer('side_orders', sideItems);
+                setLegendForContainer('extra', extraItems);
+            } else {
+                const items = menuData[category.key] ? menuData[category.key].filter(i => i.name) : [];
+                setLegendForContainer(category.id, items);
+            }
+        });
+    }
+
+    function setLegendForContainer(containerIdPrefix, items) {
+        // Determine if any item has both small_price and large_price
+        const hasTwoSizes = items.some(it => it.small_price !== undefined && it.large_price !== undefined);
+        const legendEl = document.getElementById(`${containerIdPrefix}SizesLegend`);
+        if (!legendEl) return;
+        if (hasTwoSizes) {
+            // Allow category-specific labels
+            let label = 'Pint / Quart';
+            if (containerIdPrefix === 'egg_foo_young') {
+                label = '2 Patties / 4 Patties';
+            } else if (containerIdPrefix === 'soups') {
+                // If you update the JSON to use different meaning for soups, change here.
+                label = 'Pint / Quart';
+            }
+            legendEl.innerHTML = `<span class="menu-item-price size-legend-text">${label}</span>`;
+        } else {
+            // If no two-size items, clear legend (assume quart)
+            legendEl.innerHTML = '';
+        }
+    }
 
 // Generate navigation buttons dynamically
 function generateMenuNavigation() {
@@ -184,16 +225,18 @@ function generateMenuCategories() {
                 <div class="subsection-header">
                     <h4>Side Orders</h4>
                 </div>
+                    <div class="size-legend" id="side_ordersSizesLegend"></div>
                 <div class="menu-grid" id="side_ordersItems"></div>
                 <div class="subsection-header">
                     <h4>Extra Portions</h4>
                 </div>
+                    <div class="size-legend" id="extraSizesLegend"></div>
                 <div class="menu-grid" id="extraItems"></div>
             `;
         } else {
             // All other categories use regular grid
-            const gridClass = 'menu-grid';
-            categoryHTML += `<div class="${gridClass}" id="${category.id}Items"></div>`;
+                const gridClass = 'menu-grid';
+                categoryHTML += `<div class="size-legend" id="${category.id}SizesLegend"></div><div class="${gridClass}" id="${category.id}Items"></div>`;
         }
         
         categoryDiv.innerHTML = categoryHTML;

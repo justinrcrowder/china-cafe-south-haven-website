@@ -179,24 +179,29 @@
   "soups": [
     {
       "name": "Chicken Noodle Soup",
-      "price": 4.25
+      "small_price": 4.25,
+      "large_price": 8.50
     },
     {
       "name": "Hot & Sour Soup (Hot)",
-      "price": 4.25
+      "small_price": 4.25,
+      "large_price": 8.50
     },
     {
       "name": "Wonton Soup",
-      "price": 4.25
+      "small_price": 4.25,
+      "large_price": 8.50
     },
     {
       "name": "Egg Drop Soup",
-      "price": 4.25,
+      "small_price": 4.25,
+      "large_price": 8.50,
       "gf": true
     },
     {
       "name": "Vegetable Soup",
-      "price": 4.25,
+      "small_price": 4.25,
+      "large_price": 8.50,
       "gf": true
     },
     {
@@ -572,7 +577,7 @@
       "large_price": 15.95
     },
     {
-      "name": "Szechwan Scallop (Hot1)",
+      "name": "Szechwan Scallop (Hot!)",
       "large_price": 15.95
     },
     {

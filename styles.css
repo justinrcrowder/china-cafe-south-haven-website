@@ -130,6 +130,13 @@ html {
     line-height: 1.2;
 }
 
+/* Header info link styling (desktop carryout phone) */
+.header-info .info-value a {
+    color: var(--white);
+    text-decoration: underline;
+    font-weight: 700;
+}
+
 .info-value .closed {
     color: var(--primary-red);
     font-weight: 600;
@@ -370,7 +377,7 @@ html {
 /* Menu Section */
 .menu-section {
     margin-top: 0; /* No margin on mobile since info section provides spacing */
-    padding: 2rem 0 0 0; /* Remove bottom padding completely */
+    padding: 0 0 0 0; /* Remove bottom padding completely */
     background: var(--white);
     position: relative;
     margin-bottom: 0; /* Ensure no bottom margin */
@@ -391,6 +398,37 @@ html {
     overflow: hidden; /* Prevent any overflow */
 }
 
+/* Size legend shown at top of categories when Pint/Quart sizes apply */
+.menu-category {
+    position: relative; /* allow absolute-positioned legend */
+}
+
+.size-legend {
+    margin: 0 0 0.5rem 0;
+}
+
+.size-legend-text {
+    color: var(--black);
+    font-size: 1rem;
+    font-weight: 700;
+    display: inline-block;
+}
+
+/* Place the legend at the top-right of the category on larger screens */
+@media (min-width: 768px) {
+    .size-legend {
+        position: absolute;
+        top: 1.25rem;
+        right: 1.5rem;
+        margin: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .size-legend { text-align: right; margin-bottom: 0.5rem; position: static; }
+    .size-legend-text { font-size: 0.95rem; }
+}
+
 .section-title {
     text-align: center;
     font-size: 3rem;
@@ -398,6 +436,60 @@ html {
     margin-bottom: 3rem;
     font-family: var(--font-primary);
     font-weight: 600;
+
+/* Carryout-only banner styles (visible on mobile and desktop) */
+.carryout-banner {
+    --carryout-banner-height: 48px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--carryout-banner-height);
+    background: var(--primary-red);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    z-index: 1100;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+.carryout-banner .container {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+.carryout-banner .carryout-phone {
+    color: var(--white);
+    text-decoration: underline;
+    margin-left: 6px;
+}
+@media (max-width: 600px) {
+    .carryout-banner {
+        --carryout-banner-height: 56px;
+        padding: 6px 0.5rem;
+        height: var(--carryout-banner-height);
+    }
+    .carryout-banner .container {
+        flex-direction: column;
+        font-size: 0.92rem;
+        gap: 4px;
+    }
+}
+
+/* Move header down when banner is present */
+.carryout-banner + .header {
+    top: var(--carryout-banner-height);
+}
+
+/* Adjust subsequent sections spacing so content isn't hidden under header/banner */
+.carryout-banner + .header ~ .info-section,
+.carryout-banner + .header ~ .info-section.mobile-only,
+.carryout-banner + .header ~ .menu-section,
+.carryout-banner + .header ~ .menu-categories-section {
+    margin-top: calc(90px + var(--carryout-banner-height));
+}
 }
 
 .menu-nav {
@@ -806,6 +898,67 @@ html {
         color: var(--white);
         border: 1px solid rgba(255, 255, 255, 0.2);
     }
+
+    /* Special styling for the prominent carryout card */
+    .info-section.mobile-only .info-card.carryout-card {
+        grid-column: 1 / -1; /* Span both columns */
+        padding: 0.5rem 0.75rem;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        background: linear-gradient(135deg, var(--dark-green) 0%, var(--forest-green) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+        border-radius: 10px;
+        text-align: center;
+        color: var(--white);
+    }
+
+    .info-section.mobile-only .info-card.carryout-card i {
+        font-size: 1.1rem;
+        color: var(--white);
+        margin-top: 0;
+    }
+
+    .info-section.mobile-only .info-card.carryout-card h4 {
+        color: var(--white);
+        font-size: 1rem;
+        margin: 0;
+        font-weight: 700;
+    }
+
+    /* Mobile: show item icons (GF, hot) to the left of the name to avoid wrapping */
+    .menu-item-header {
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .menu-item-name {
+        display: inline-block;
+        align-items: center;
+        gap: 0.35rem;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: inherit;
+    }
+
+    .gf-indicator {
+        order: 0; /* place GF indicator after the name */
+        margin-left: 0.4rem;
+        font-size: 0.75rem;
+    }
+
+    /* Restore hot chili after the name */
+    .menu-item-name.hot::before {
+        content: none;
+    }
+    .menu-item-name.hot::after {
+        content: " 🌶️";
+        margin-left: 0.25rem;
+    }
     
     .info-section.mobile-only .info-card i {
         font-size: 1.2rem; /* Restore size for better visibility */
@@ -854,7 +1007,7 @@ html {
     /* Mobile horizontal scroll navigation */
     .mobile-scroll-nav {
         display: block;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         overflow-x: auto;
         overflow-y: hidden;
         -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
@@ -1044,10 +1197,6 @@ html {
         font-size: 0.85rem;
     }
     
-    .menu-section {
-        margin-top: 130px;
-    }
-    
     .menu-grid {
         display: block;
     }
@@ -1060,6 +1209,19 @@ html {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+    }
+}
+
+/* Ensure sections are pushed down on larger screens so fixed header doesn't overlap content */
+@media (min-width: 768px) {
+    /* Use the same offset used elsewhere (90px) and include banner height if present */
+    .menu-section,
+    .menu-header {
+        margin-top: calc(90px + var(--carryout-banner-height, 0px));
+    }
+    /* If menu-header uses full-bleed background, add a little inner padding so the title is clear */
+    .menu-header .section-title {
+        padding-top: 0.5rem;
     }
 }
 
@@ -1110,6 +1272,12 @@ html {
     .info-value {
         font-size: 0.9rem;
     }
+
+    /* Put the CLOSED label on its own line in the header on desktop */
+    .header-info .info-value .closed {
+        display: block;
+        margin-top: 2px;
+    }
     
     /* Enhanced Navigation Button */
     .nav .btn {
@@ -1129,11 +1297,6 @@ html {
         border: 2px solid var(--primary-red);
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(220, 20, 60, 0.3);
-    }
-    
-    /* Update menu section margin for desktop */
-    .menu-section {
-        margin-top: 140px;
     }
     
     /* Menu navigation - limit to 2 rows */
