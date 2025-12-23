@@ -107,53 +107,12 @@ async function loadMenuData() {
         generateMenuNavigation();
         generateMenuCategories();
         populateAllMenuItems();
-            // After populating items, add size legends where appropriate
-            addSizeLegends();
         setupMenuNavigation();
     } catch (error) {
         console.error('Error loading menu data:', error);
         showMenuError();
     }
 }
-
-    // Add size legends (e.g., Pint / Quart) to categories that have items with two prices
-    function addSizeLegends() {
-        if (!menuData) return;
-
-        menuCategories.forEach(category => {
-            if (category.isComposite && category.id === 'sides_extras') {
-                // side_orders
-                const sideItems = menuData.side_orders ? menuData.side_orders.filter(i => i.name) : [];
-                const extraItems = menuData.extra ? menuData.extra.filter(i => i.name) : [];
-                setLegendForContainer('side_orders', sideItems);
-                setLegendForContainer('extra', extraItems);
-            } else {
-                const items = menuData[category.key] ? menuData[category.key].filter(i => i.name) : [];
-                setLegendForContainer(category.id, items);
-            }
-        });
-    }
-
-    function setLegendForContainer(containerIdPrefix, items) {
-        // Determine if any item has both small_price and large_price
-        const hasTwoSizes = items.some(it => it.small_price !== undefined && it.large_price !== undefined);
-        const legendEl = document.getElementById(`${containerIdPrefix}SizesLegend`);
-        if (!legendEl) return;
-        if (hasTwoSizes) {
-            // Allow category-specific labels
-            let label = 'Pint / Quart';
-            if (containerIdPrefix === 'egg_foo_young') {
-                label = '2 Patties / 4 Patties';
-            } else if (containerIdPrefix === 'soups') {
-                // If you update the JSON to use different meaning for soups, change here.
-                label = 'Pint / Quart';
-            }
-            legendEl.innerHTML = `<span class="menu-item-price size-legend-text">${label}</span>`;
-        } else {
-            // If no two-size items, clear legend (assume quart)
-            legendEl.innerHTML = '';
-        }
-    }
 
 // Generate navigation buttons dynamically
 function generateMenuNavigation() {
@@ -213,7 +172,24 @@ function generateMenuCategories() {
         categoryDiv.className = `menu-category ${index === 0 ? 'active' : ''}`;
         categoryDiv.id = category.id;
         
+        // Determine if this category contains items with two prices (small/large)
+        const hasTwoPrices = menuData && menuData[category.key] && Array.isArray(menuData[category.key])
+            && menuData[category.key].some(it => it && it.small_price !== undefined && it.large_price !== undefined);
+
+        // Decide legend text: default Pint / Quart, special-case Egg Foo Young
+        let legendText = '';
+        if (hasTwoPrices) {
+            if (category.key === 'egg_foo_young') {
+                legendText = '2 Patties / 4 Patties';
+            } else {
+                legendText = 'Pint / Quart';
+            }
+        }
+
         let categoryHTML = `<h3>${category.title}</h3>`;
+        if (legendText) {
+            categoryHTML += `<span class="price-legend">${legendText}</span>`;
+        }
         
         if (category.description) {
             categoryHTML += `<p class="menu-description">${category.description}</p>`;
@@ -225,18 +201,16 @@ function generateMenuCategories() {
                 <div class="subsection-header">
                     <h4>Side Orders</h4>
                 </div>
-                    <div class="size-legend" id="side_ordersSizesLegend"></div>
                 <div class="menu-grid" id="side_ordersItems"></div>
                 <div class="subsection-header">
                     <h4>Extra Portions</h4>
                 </div>
-                    <div class="size-legend" id="extraSizesLegend"></div>
                 <div class="menu-grid" id="extraItems"></div>
             `;
         } else {
             // All other categories use regular grid
-                const gridClass = 'menu-grid';
-                categoryHTML += `<div class="size-legend" id="${category.id}SizesLegend"></div><div class="${gridClass}" id="${category.id}Items"></div>`;
+            const gridClass = 'menu-grid';
+            categoryHTML += `<div class="${gridClass}" id="${category.id}Items"></div>`;
         }
         
         categoryDiv.innerHTML = categoryHTML;
@@ -669,9 +643,45 @@ function createMenuItem(name, description, price, note, isHot, isGlutenFree = fa
     const div = document.createElement('div');
     div.className = 'menu-item';
     
-    const nameClass = isHot ? 'menu-item-name hot' : 'menu-item-name';
-    const gfIcon = isGlutenFree ? ' <span class="gf-indicator">GF</span>' : '';
+    // Build left-side icon elements (separate from the text)
+    const leftWrap = document.createElement('div');
+    leftWrap.className = 'menu-item-left';
     
+    // Create icons container
+    const iconsWrap = document.createElement('div');
+    iconsWrap.className = 'menu-item-icons';
+    
+    if (isHot) {
+        const hotEl = document.createElement('span');
+        hotEl.className = 'menu-item-icon hot-icon';
+        hotEl.textContent = '🌶️';
+        iconsWrap.appendChild(hotEl);
+    }
+    
+    if (isGlutenFree) {
+        const gfEl = document.createElement('span');
+        gfEl.className = 'gf-indicator';
+        gfEl.textContent = 'GF';
+        iconsWrap.appendChild(gfEl);
+    }
+    
+    leftWrap.appendChild(iconsWrap);
+    
+    // Create name wrapper
+    const nameWrap = document.createElement('div');
+    nameWrap.className = 'menu-item-name-wrapper';
+    
+    const nameEl = document.createElement('h4');
+    nameEl.className = 'menu-item-name';
+    if (isHot) {
+        nameEl.classList.add('hot');
+    }
+    nameEl.textContent = name;
+    nameWrap.appendChild(nameEl);
+    
+    leftWrap.appendChild(nameWrap);
+    
+    // Price HTML
     let priceHTML = '';
     if (typeof price === 'object' && price && price.small && price.large) {
         priceHTML = `<span class="menu-item-price">$${(price.small || 0).toFixed(2)} / $${(price.large || 0).toFixed(2)}</span>`;
@@ -681,14 +691,20 @@ function createMenuItem(name, description, price, note, isHot, isGlutenFree = fa
         priceHTML = `<span class="menu-item-price">Price not available</span>`;
     }
     
-    div.innerHTML = `
-        <div class="menu-item-header">
-            <h4 class="${nameClass}">${name}${gfIcon}</h4>
-            ${priceHTML}
-        </div>
-        ${description ? `<p class="menu-item-description">${description}</p>` : ''}
-        ${note ? `<p class="menu-item-note">${note}</p>` : ''}
-    `;
+    // Assemble header
+    const header = document.createElement('div');
+    header.className = 'menu-item-header';
+    header.appendChild(leftWrap);
+    
+    // attach price (as HTML string for existing styles)
+    const priceWrapper = document.createElement('div');
+    priceWrapper.className = 'menu-item-price-wrapper';
+    priceWrapper.innerHTML = priceHTML;
+    header.appendChild(priceWrapper);
+    
+    div.appendChild(header);
+    if (description) div.insertAdjacentHTML('beforeend', `<p class="menu-item-description">${description}</p>`);
+    if (note) div.insertAdjacentHTML('beforeend', `<p class="menu-item-note">${note}</p>`);
     
     return div;
 }
@@ -712,7 +728,8 @@ function createSpecialtyItem(name, description, price, isHot) {
 
 // Helper function to check if a dish is hot/spicy
 function isHotDish(name) {
-    return name.toLowerCase().includes('(hot)') || 
+    return name.toLowerCase().includes('(hot!)') || 
+           name.toLowerCase().includes('(hot)') || 
            name.toLowerCase().includes('hot') || 
            name.toLowerCase().includes('spicy') ||
            name.toLowerCase().includes('szechuan') ||

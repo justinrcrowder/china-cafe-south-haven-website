@@ -398,35 +398,59 @@ html {
     overflow: hidden; /* Prevent any overflow */
 }
 
-/* Size legend shown at top of categories when Pint/Quart sizes apply */
+/* Price legend shown in the top-right of menu category headers when two prices exist */
 .menu-category {
-    position: relative; /* allow absolute-positioned legend */
+    position: relative;
+    padding-top: 0.5rem;
 }
 
-.size-legend {
+.menu-category > h3 {
     margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
 }
 
-.size-legend-text {
-    color: var(--black);
-    font-size: 1rem;
+.menu-category .price-legend {
+    position: absolute;
+    top: 0.35rem;
+    right: 0.5rem;
+    font-size: 0.85rem;
     font-weight: 700;
-    display: inline-block;
-}
-
-/* Place the legend at the top-right of the category on larger screens */
-@media (min-width: 768px) {
-    .size-legend {
-        position: absolute;
-        top: 1.25rem;
-        right: 1.5rem;
-        margin: 0;
-    }
+    color: var(--gray-dark);
+    background: rgba(255,255,255,0.9);
+    padding: 0.15rem 0.5rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    white-space: nowrap;
 }
 
 @media (max-width: 767px) {
-    .size-legend { text-align: right; margin-bottom: 0.5rem; position: static; }
-    .size-legend-text { font-size: 0.95rem; }
+    /* On small screens position the legend as a top-right pill inside the category card */
+    .menu-category {
+        position: relative;
+        padding-top: 1.25rem; /* give space for absolute legend */
+    }
+
+    .menu-category .price-legend {
+        position: absolute !important;
+        right: 0.75rem;
+        top: 1.05rem;
+        display: inline-block;
+        margin: 0;
+        background: rgba(255,255,255,0.95);
+        color: var(--gray-dark);
+        padding: 0.15rem 0.6rem;
+        border-radius: 10px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        text-align: center;
+        font-weight: 700;
+        z-index: 10;
+        white-space: nowrap;
+    }
+
+    /* Ensure header has room so legend doesn't overlap following content */
+    .menu-category > h3 {
+        margin-bottom: 0.75rem;
+    }
 }
 
 .section-title {
@@ -529,7 +553,7 @@ html {
 .menu-category {
     display: block;
     margin-bottom: 1.5rem; /* Reduce from 3rem */
-    padding: 2rem;
+    padding: 2rem 0.75rem;
     scroll-margin-top: 120px; /* Account for fixed header */
     background: var(--white);
     border-radius: var(--border-radius);
@@ -664,40 +688,66 @@ html {
     font-weight: 700;
 }
 
+.menu-item-left {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex: 1;
+}
+
+.menu-item-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    align-items: center;
+    width: 20px;
+    flex-shrink: 0;
+    height: 1.3em;
+    justify-content: flex-start;
+}
+
+.menu-item-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.menu-item-name-wrapper {
+    flex: 1;
+    min-width: 0;
+}
+
 .menu-item-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 0.25rem;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 
 .menu-item-name {
     color: var(--black);
     font-weight: 600;
     font-size: 1rem;
-    flex: 1;
+    line-height: 1.3;
+    margin: 0;
+    word-wrap: break-word;
 }
 
 .menu-item-name.hot {
     color: var(--primary-red);
 }
 
-.menu-item-name.hot::after {
-    content: " 🌶️";
-}
-
 .gf-indicator {
     background-color: var(--primary-green);
     color: white;
-    font-size: 0.55rem;
-    font-weight: 600;
-    padding: 0.1rem 0.25rem;
-    border-radius: 2px;
-    margin-left: 0.4rem;
+    font-size: 0.5rem;
+    font-weight: 700;
+    padding: 0.15rem 0.3rem;
+    border-radius: 3px;
     text-transform: uppercase;
     letter-spacing: 0.3px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .menu-item-price {
@@ -726,6 +776,7 @@ html {
     font-size: 0.9rem;
     line-height: 1.4;
     margin-top: 0.25rem;
+    margin-left: 27px;
 }
 
 .menu-item-note {
@@ -928,37 +979,6 @@ html {
         margin: 0;
         font-weight: 700;
     }
-
-    /* Mobile: show item icons (GF, hot) to the left of the name to avoid wrapping */
-    .menu-item-header {
-        flex-wrap: nowrap;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .menu-item-name {
-        display: inline-block;
-        align-items: center;
-        gap: 0.35rem;
-        white-space: normal;
-        overflow: visible;
-        text-overflow: inherit;
-    }
-
-    .gf-indicator {
-        order: 0; /* place GF indicator after the name */
-        margin-left: 0.4rem;
-        font-size: 0.75rem;
-    }
-
-    /* Restore hot chili after the name */
-    .menu-item-name.hot::before {
-        content: none;
-    }
-    .menu-item-name.hot::after {
-        content: " 🌶️";
-        margin-left: 0.25rem;
-    }
     
     .info-section.mobile-only .info-card i {
         font-size: 1.2rem; /* Restore size for better visibility */
@@ -1103,7 +1123,7 @@ html {
         border-radius: var(--border-radius);
         border: 2px solid var(--gray-light);
         box-shadow: var(--shadow);
-        padding: 2rem;
+        padding: 1rem;
     }
     
     .menu-category:first-child {
@@ -1272,11 +1292,11 @@ html {
     .info-value {
         font-size: 0.9rem;
     }
-
-    /* Put the CLOSED label on its own line in the header on desktop */
-    .header-info .info-value .closed {
+    /* Force "Mon: CLOSED" onto its own line on desktop */
+    .header .info-value .closed {
         display: block;
-        margin-top: 2px;
+        white-space: nowrap;
+        margin-top: 0.15rem;
     }
     
     /* Enhanced Navigation Button */
@@ -1321,6 +1341,616 @@ html {
         display: block;
     }
     
+    /* Place the price legend below the header on desktop */
+    .menu-category .price-legend {
+        top: 3rem;
+        right: 0.75rem;
+    }
+    .specialties-grid {
+        display: block;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.menu-item, .specialty-item {
+    animation: fadeInUp 0.4s ease-out;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus styles */
+button:focus, a:focus {
+    outline: 2px solid var(--primary-yellow);
+    outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+    .header, .footer {
+        display: none;
+    }
+    
+    .menu-nav {
+        display: none;
+    }
+    
+    .menu-category {
+        display: block !important;
+        page-break-inside: avoid;
+    }
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 767px) {
+    /* Reduce excessive spacing on mobile */
+    :root {
+        --section-padding: 1rem 0; /* Reduce from 4rem to 1rem */
+        --container-padding: 0.75rem; /* Reduce from 1rem */
+    }
+    
+    /* Remove background image on mobile for better performance and readability */
+    .menu-header {
+        background: var(--white);
+        padding: 1rem 0; /* Reduce from 3rem */
+        margin-bottom: 0.5rem; /* Reduce from 2rem */
+        margin-left: 0; /* Reset full-width margins on mobile */
+        margin-right: 0;
+        width: 100%; /* Use 100% instead of 100vw on mobile */
+        max-width: 100%;
+    }
+    
+    .section-title {
+        font-size: 2.25rem; /* Increase from 1.75rem */
+        margin-bottom: 1rem; /* Reduce from 3rem */
+    }
+    
+    .menu-category {
+        margin-bottom: 1rem; /* Reduce from 3rem */
+        padding: 1rem 0; /* Reduce from 2rem */
+    }
+    
+    .menu-category h3 {
+        font-size: 1.8rem; /* Increase from 1.4rem */
+        margin-bottom: 0.5rem; /* Reduce from 1rem */
+    }
+    
+    .menu-item {
+        padding: 0.5rem 0; /* Reduce from 1rem */
+    }
+    
+    .specialty-item {
+        padding: 0.75rem 0; /* Reduce from 1.5rem */
+    }
+    
+    .mobile-scroll-nav {
+        margin-bottom: 0; /* Remove bottom margin to eliminate green gap */
+        padding: 0.25rem 0; /* Reduce from 0.5rem */
+    }
+    
+    .info-section.mobile-only {
+        margin-top: 70px; /* Restore top margin */
+        padding: 1rem 0; /* Restore bottom padding for spacing */
+        margin-bottom: 0; /* Ensure no bottom margin */
+    }
+
+    /* Show the dragon next to logo on mobile */
+    .logo-dragon {
+        display: inline-block;
+        width: 64px; /* increased width for better visibility on mobile */
+        height: auto;
+        margin-left: 0.5rem;
+    }
+
+    /* Ensure header content stays compact and the logo + dragon align */
+    .header-content {
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    /* Cap the dragon size on very small phones to avoid overflow */
+    @media (max-width: 350px) {
+        .logo-dragon {
+            width: 44px;
+        }
+    }
+    
+    /* Make info cards much more compact on mobile */
+    .info-section.mobile-only .info-grid {
+        gap: 0.5rem; /* Reduce gap for side-by-side layout */
+        max-width: 100%;
+        grid-template-columns: 1fr 1fr; /* Two columns for side-by-side */
+    }
+    
+    .info-section.mobile-only .info-card {
+        padding: 0.75rem; /* Increase padding for better spacing */
+        gap: 0.5rem;
+        margin: 0;
+        flex-direction: row; /* Back to horizontal layout */
+        text-align: left; /* Left align for better readability */
+        align-items: flex-start; /* Align items to top */
+        background: linear-gradient(135deg, var(--dark-green) 0%, var(--forest-green) 100%);
+        color: var(--white);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Special styling for the prominent carryout card */
+    .info-section.mobile-only .info-card.carryout-card {
+        grid-column: 1 / -1; /* Span both columns */
+        padding: 0.5rem 0.75rem;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        background: linear-gradient(135deg, var(--dark-green) 0%, var(--forest-green) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+        border-radius: 10px;
+        text-align: center;
+        color: var(--white);
+    }
+
+    .info-section.mobile-only .info-card.carryout-card i {
+        font-size: 1.1rem;
+        color: var(--white);
+        margin-top: 0;
+    }
+
+    .info-section.mobile-only .info-card.carryout-card h4 {
+        color: var(--white);
+        font-size: 1rem;
+        margin: 0;
+        font-weight: 700;
+    }
+    
+    .info-section.mobile-only .info-card i {
+        font-size: 1.2rem; /* Restore size for better visibility */
+        margin-top: 0.1rem; /* Small top margin to align with text */
+        margin-right: 0; /* Remove right margin since we have gap */
+        flex-shrink: 0; /* Prevent icon from shrinking */
+    }
+    
+    .info-section.mobile-only .info-card h4 {
+        font-size: 0.9rem; /* Slightly larger for better readability */
+        margin-bottom: 0.25rem;
+        font-weight: 600;
+        color: var(--primary-yellow);
+    }
+    
+    .info-section.mobile-only .info-card p {
+        font-size: 0.8rem; /* Slightly larger for readability */
+        line-height: 1.3;
+        margin: 0;
+    }
+    
+    .info-section.mobile-only .info-card a {
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+        z-index: 9999; /* Ensure it's above other mobile elements */
+    }
+    
+    /* Hide desktop navigation on mobile */
+    .menu-nav {
+        display: none;
+    }
+    
+    /* Hide mobile dropdown navigation */
+    .mobile-menu-nav {
+        display: none;
+    }
+    
+    /* Mobile horizontal scroll navigation */
+    .mobile-scroll-nav {
+        display: block;
+        margin-bottom: 1rem;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+        position: relative;
+        padding: 0.5rem 0;
+        /* Slightly cut off edges to indicate scrollability */
+        margin-left: -0.5rem;
+        margin-right: -0.5rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        border: none;
+        background: transparent;
+    }
+    
+    .mobile-scroll-nav::-webkit-scrollbar {
+        display: none; /* Chrome/Safari */
+    }
+    
+    .mobile-nav-buttons {
+        display: flex;
+        gap: 0.5rem;
+        padding: 0.5rem 0;
+        min-width: max-content;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    /* Scroll hint styling */
+    .scroll-hint {
+        text-align: center;
+        margin-bottom: 0.5rem;
+        color: var(--gray-medium);
+        font-size: 0.8rem;
+        opacity: 0.8;
+        animation: fadeInOut 3s ease-in-out infinite;
+        border: none;
+        background: none;
+        padding: 0;
+        height: auto;
+        position: relative;
+    }
+    
+    .scroll-hint-icon {
+        margin-left: 0.5rem;
+        animation: bounce 2s ease-in-out infinite;
+    }
+    
+    /* Ensure no visual artifacts when hint is removed */
+    .mobile-scroll-nav:not(:has(.scroll-hint)) .mobile-nav-buttons,
+    .mobile-scroll-nav .mobile-nav-buttons {
+        margin-top: 0;
+        padding-top: 0.5rem;
+    }
+    
+    @keyframes fadeInOut {
+        0%, 100% { opacity: 0.5; }
+        50% { opacity: 0.8; }
+    }
+    
+    @keyframes bounce {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-3px); }
+        75% { transform: translateX(3px); }
+    }
+    
+    .mobile-nav-btn {
+        padding: 0.75rem 1rem;
+        border: 2px solid var(--black);
+        background: var(--white);
+        color: var(--black);
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        font-size: 0.85rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    
+    .mobile-nav-btn:active {
+        background: var(--black);
+        color: var(--white);
+        transform: scale(0.98);
+    }
+    
+    /* Show all categories on mobile for full menu display */
+    .menu-category {
+        display: block !important;
+        margin-bottom: 1.5rem; /* Reduce from 3rem */
+        background: var(--white);
+        border-radius: var(--border-radius);
+        border: 2px solid var(--gray-light);
+        box-shadow: var(--shadow);
+        padding: 1rem;
+    }
+    
+    .menu-category:first-child {
+        background: rgba(220, 20, 60, 0.02); /* Red-tinted background for lunch specials */
+        border: 2px solid rgba(220, 20, 60, 0.2); /* Red-tinted border for lunch specials */
+    }
+
+    /* Make menu items more roomy on mobile and ensure icons appear left of the name */
+    .menu-item {
+        padding: 0.75rem 0.6rem; /* increase vertical + horizontal padding */
+    }
+
+    .menu-item-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+
+    /* Container for optional left icons (if added) */
+    .menu-item-icon {
+        flex: 0 0 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.05rem;
+        color: var(--primary-red);
+    }
+
+    /* Make name take remaining space and wrap nicely */
+    .menu-item-name {
+        flex: 1 1 auto;
+        font-size: 1.02rem;
+        line-height: 1.2;
+        word-break: break-word;
+        hyphens: auto;
+    }
+
+    /* Keep price on one line at the right */
+    .menu-item-price {
+        flex: 0 0 auto;
+        margin-left: 0.6rem;
+        white-space: nowrap;
+        font-size: 1rem;
+    }
+
+    /* GF indicator: show before name with spacing (we output GF before the name in JS) */
+    .gf-indicator {
+        background-color: var(--primary-green);
+        color: white;
+        font-size: 0.65rem;
+        font-weight: 600;
+        padding: 0.08rem 0.28rem;
+        border-radius: 3px;
+        margin-right: 0.45rem; /* space between icon and name */
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    /* Reduce risk of overlap with description */
+    .menu-item-description {
+        margin-top: 0.35rem;
+    }
+}
+
+/* Small mobile phone adjustments */
+@media (min-width: 350px) {
+    .header-content {
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+    }
+    
+    .logo h1 {
+        font-size: 1.4rem;
+    }
+    
+    .logo .tagline {
+        display: none; /* Hide tagline on very small screens */
+    }
+    
+    .nav .btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Mobile phone adjustments */
+@media (min-width: 480px) {
+    .header-content {
+        flex-wrap: nowrap;
+        gap: 1rem;
+    }
+    
+    .logo h1 {
+        font-size: 1.6rem;
+    }
+    
+    .logo .tagline {
+        display: block; /* Show tagline again */
+    }
+    
+    .nav .btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) {
+    /* Hide mobile navigation on desktop */
+    .mobile-menu-nav {
+        display: none;
+    }
+    
+    /* Hide mobile scroll navigation on desktop */
+    .mobile-scroll-nav {
+        display: none;
+    }
+    
+    /* Hide mobile info section on tablet and larger */
+    .info-section.mobile-only {
+        display: none;
+    }
+    
+    .header {
+        padding: 1.25rem 0;
+    }
+    
+    .header-content {
+        flex-wrap: nowrap;
+        gap: 1.5rem;
+    }
+    
+    .header-info {
+        display: flex;
+        gap: 2rem;
+    }
+    
+    .info-item {
+        gap: 0.6rem;
+    }
+    
+    .info-label {
+        font-size: 0.75rem;
+    }
+    
+    .info-value {
+        font-size: 0.85rem;
+    }
+    
+    .menu-grid {
+        display: block;
+    }
+    
+    .specialties-grid {
+        display: block;
+    }
+    
+    .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+/* Ensure sections are pushed down on larger screens so fixed header doesn't overlap content */
+@media (min-width: 768px) {
+    /* Use the same offset used elsewhere (90px) and include banner height if present */
+    .menu-section,
+    .menu-header {
+        margin-top: calc(90px + var(--carryout-banner-height, 0px));
+    }
+    /* If menu-header uses full-bleed background, add a little inner padding so the title is clear */
+    .menu-header .section-title {
+        padding-top: 0.5rem;
+    }
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+    /* Enhanced Header for Desktop */
+    .header {
+        padding: 1.5rem 0;
+    }
+    
+    .header .container {
+        max-width: 1400px;
+    }
+    
+    .header-content {
+        flex-wrap: nowrap;
+        gap: 3rem;
+    }
+    
+    .logo h1 {
+        font-size: 2.2rem;
+        letter-spacing: 1px;
+    }
+    
+    .header-info {
+        display: flex;
+        gap: 3rem;
+        flex: 1;
+        justify-content: center;
+    }
+    
+    .phone-item {
+        display: flex; /* Show phone info on desktop */
+    }
+    
+    .info-item {
+        gap: 0.75rem;
+    }
+    
+    .info-item i {
+        font-size: 1.2rem;
+    }
+    
+    .info-label {
+        font-size: 0.8rem;
+    }
+    
+    .info-value {
+        font-size: 0.9rem;
+    }
+    /* Force "Mon: CLOSED" onto its own line on desktop */
+    .header .info-value .closed {
+        display: block;
+        white-space: nowrap;
+        margin-top: 0.15rem;
+    }
+    
+    /* Enhanced Navigation Button */
+    .nav .btn {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        background: var(--white);
+        color: var(--primary-red);
+        border: 2px solid var(--primary-red);
+        box-shadow: 0 4px 15px rgba(220, 20, 60, 0.2);
+        transition: all 0.3s ease;
+        font-weight: 700;
+    }
+    
+    .nav .btn:hover {
+        background: var(--primary-red);
+        color: var(--white);
+        border: 2px solid var(--primary-red);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(220, 20, 60, 0.3);
+    }
+    
+    /* Menu navigation - limit to 2 rows */
+    .menu-nav {
+        max-width: 1400px;
+        margin: 0 auto 3rem auto;
+        gap: 0.75rem;
+    }
+    
+    .menu-cat-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+        flex: 0 1 auto;
+        min-width: 120px;
+    }
+    
+    .restaurant-info h2 {
+        font-size: 3.5rem;
+    }
+    
+    .menu-grid {
+        display: block;
+    }
+    
+    /* Place the price legend below the header on desktop */
+    .menu-category .price-legend {
+        top: 3rem;
+        right: 0.75rem;
+    }
     .specialties-grid {
         display: block;
     }
