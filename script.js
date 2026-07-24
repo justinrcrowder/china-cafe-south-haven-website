@@ -7,7 +7,7 @@ const menuCategories = [
         key: 'lunch_menu',
         id: 'lunch',
         title: 'Lunch Specials',
-        description: 'Available 11:00 AM to 2:30 PM Tuesday-Saturday (Except Holidays) • Entrees Include: Crab Rangoon (2), Fried Rice, Fortune Cookie'
+        description: 'Available 11:00 AM to 2:30 PM Tuesday-Friday and 12:00 PM to 2:30 PM Saturday (Except Holidays) • Entrees Include: Crab Rangoon (2), Fried Rice, Fortune Cookie'
     },
     {
         key: 'appetizers',
@@ -23,6 +23,12 @@ const menuCategories = [
         key: 'chef_s_specialties',
         id: 'specialties',
         title: 'Chef\'s Specialties'
+    },
+    {
+        key: 'weight_watchers_menu',
+        id: 'weight_watchers',
+        title: 'Weight Watchers',
+        description: 'Served without salt, sugar, corn starch, or MSG'
     },
     {
         key: 'chicken',
@@ -53,6 +59,12 @@ const menuCategories = [
         key: 'lo_mein_noodles',
         id: 'lo_mein',
         title: 'Lo Mein Noodles'
+    },
+    {
+        key: 'subgum',
+        id: 'subgum',
+        title: 'Subgum',
+        description: 'Served with rice or with fried noodles'
     },
     {
         key: 'chow_mein_chop_suey',
@@ -89,12 +101,18 @@ const menuCategories = [
 
 // Initialize the website
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM Content Loaded - starting initialization');
     showMenuLoading();
     loadMenuData();
     setupSmoothScrolling();
     setupBackToTopButton();
+    setFooterYear();
 });
+
+// Keep the copyright year current without anyone having to remember to edit it
+function setFooterYear() {
+    const yearEl = document.getElementById('footerYear');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+}
 
 // Load menu data from JSON file
 async function loadMenuData() {
@@ -188,6 +206,8 @@ function generateMenuCategories() {
 
         let categoryHTML = `<h3>${category.title}</h3>`;
         if (legendText) {
+            // Flag it so the title can leave room for the pill instead of running under it
+            categoryDiv.classList.add('has-legend');
             categoryHTML += `<span class="price-legend">${legendText}</span>`;
         }
         
@@ -354,12 +374,14 @@ function populateAllMenuItems() {
     populateAppetizers();
     populateSoups();
     populateSpecialties();
+    populateWeightWatchers();
     populateChickenDishes();
     populatePorkDishes();
     populateBeefDishes();
     populateSeafoodDishes();
     populateVegetableDishes();
     populateLoMeinNoodles();
+    populateSubgum();
     populateChowMeinChopSuey();
     populateEasternNoodles();
     populateFriedRice();
@@ -420,6 +442,21 @@ function populateSpecialties() {
     
     // Filter out note objects and process only menu items
     const menuItems = menuData.chef_s_specialties.filter(item => item.name);
+    menuItems.forEach(item => {
+        const prices = getPrice(item);
+        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
+        container.appendChild(menuItem);
+    });
+}
+
+function populateWeightWatchers() {
+    const container = document.getElementById('weight_watchersItems');
+    if (!container || !menuData.weight_watchers_menu) return;
+
+    container.innerHTML = '';
+
+    // Filter out note objects and process only menu items
+    const menuItems = menuData.weight_watchers_menu.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
         const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
@@ -502,12 +539,6 @@ function populateVegetableDishes() {
     });
 }
 
-// Populate menu items from JSON data (legacy function - now handled by populateAllMenuItems)
-function populateMenuItems() {
-    populateAllMenuItems();
-}
-
-
 function populateLoMeinNoodles() {
     const container = document.getElementById('lo_meinItems');
     if (!container || !menuData.lo_mein_noodles) return;
@@ -519,6 +550,20 @@ function populateLoMeinNoodles() {
     menuItems.forEach(item => {
         const prices = getPrice(item);
         const menuItem = createMenuItem(item.name, null, prices, note, false, item.gf);
+        container.appendChild(menuItem);
+    });
+}
+
+function populateSubgum() {
+    const container = document.getElementById('subgumItems');
+    if (!container || !menuData.subgum) return;
+
+    container.innerHTML = '';
+
+    const menuItems = menuData.subgum.filter(item => item.name);
+    menuItems.forEach(item => {
+        const prices = getPrice(item);
+        const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
         container.appendChild(menuItem);
     });
 }
@@ -709,33 +754,11 @@ function createMenuItem(name, description, price, note, isHot, isGlutenFree = fa
     return div;
 }
 
-// Helper function to create specialty item HTML
-function createSpecialtyItem(name, description, price, isHot) {
-    const div = document.createElement('div');
-    div.className = 'specialty-item';
-    
-    const nameClass = isHot ? 'hot' : '';
-    const hotIcon = isHot ? ' 🌶️' : '';
-    
-    div.innerHTML = `
-        <h4 class="${nameClass}">${name}${hotIcon}</h4>
-        <p>${description}</p>
-        <div class="specialty-price">$${price.toFixed(2)}</div>
-    `;
-    
-    return div;
-}
-
-// Helper function to check if a dish is hot/spicy
+// Helper function to check if a dish is hot/spicy.
+// The printed menu marks spicy dishes with "(Hot!)", so trust that rather than
+// guessing from ingredients — guessing flagged the curries, which are not marked spicy.
 function isHotDish(name) {
-    return name.toLowerCase().includes('(hot!)') || 
-           name.toLowerCase().includes('(hot)') || 
-           name.toLowerCase().includes('hot') || 
-           name.toLowerCase().includes('spicy') ||
-           name.toLowerCase().includes('szechuan') ||
-           name.toLowerCase().includes('kung pao') ||
-           name.toLowerCase().includes('hunan') ||
-           name.toLowerCase().includes('curry');
+    return /\(hot!?\)/i.test(name);
 }
 
 // Add scroll effect to header
@@ -778,20 +801,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 1000);
 });
 
-// Add click-to-call functionality for phone numbers
-document.addEventListener('DOMContentLoaded', function() {
-    const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
-    phoneLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // For desktop users, show an alert
-            if (window.innerWidth > 768 && !('ontouchstart' in window)) {
-                e.preventDefault();
-                alert('Call (269) 637-8591 to place your order!');
-            }
-        });
-    });
-});
-
 // Add loading state for menu
 function showMenuLoading() {
     const container = document.getElementById('menuCategoriesContainer');
@@ -825,9 +834,17 @@ function setupBackToTopButton() {
     const backToTopBtn = document.getElementById('backToTopBtn');
     if (!backToTopBtn) return;
 
-    // Show/hide button based on scroll position
+    // Show/hide button based on scroll position. It sits over the price column on
+    // narrow screens, so keep it out of the way while the reader is scrolling down
+    // through the menu and bring it back as soon as they scroll up.
+    let lastScrollY = window.scrollY;
+
     function toggleBackToTopButton() {
-        if (window.scrollY > 300) {
+        const y = window.scrollY;
+        const scrollingDown = y > lastScrollY;
+        lastScrollY = y;
+
+        if (y > 300 && !scrollingDown) {
             backToTopBtn.classList.add('show');
         } else {
             backToTopBtn.classList.remove('show');
