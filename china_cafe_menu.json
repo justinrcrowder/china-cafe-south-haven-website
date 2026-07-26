@@ -93,9 +93,7 @@
     },
     {
       "name": "Governor or Orange Chicken (Hot!)",
-      "price": 12.75,
-      "image": "images/governors_chicken.JPG",
-      "image_alt": "Governor's chicken: tender chicken pieces with bell peppers in a tangy brown sauce"
+      "price": 12.75
     },
     {
       "name": "Sesame Chicken",
@@ -268,7 +266,9 @@
     {
       "name": "Governor's Chicken (Hot!)",
       "price": 14.50,
-      "description": "Boneless chicken chunks sautéed with bell peppers and a special tangy brown sauce."
+      "description": "Boneless chicken chunks sautéed with bell peppers and a special tangy brown sauce.",
+      "image": "images/governors_chicken.JPG",
+      "image_alt": "Governor's chicken: tender chicken pieces with bell peppers in a tangy brown sauce"
     },
     {
       "name": "Orange Chicken (Hot!)",
