@@ -221,6 +221,21 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
+    <!-- Dish photo viewer. The image src is set on open, so photos cost nothing
+         until someone actually asks to see one. -->
+    <div class="photo-modal" id="photoModal" hidden>
+        <div class="photo-modal-panel" role="dialog" aria-modal="true" aria-labelledby="photoModalTitle">
+            <button class="photo-modal-close" id="photoModalClose" aria-label="Close photo">
+                <i class="fas fa-xmark" aria-hidden="true"></i>
+            </button>
+            <img class="photo-modal-image" id="photoModalImage" src="" alt="" decoding="async">
+            <div class="photo-modal-caption">
+                <h3 id="photoModalTitle"></h3>
+                <p class="photo-modal-price" id="photoModalPrice"></p>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

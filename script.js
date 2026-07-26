@@ -105,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadMenuData();
     setupSmoothScrolling();
     setupBackToTopButton();
+    setupPhotoModal();
     setFooterYear();
 });
 
@@ -400,7 +401,7 @@ function populateLunchMenu() {
     const menuItems = menuData.lunch_menu.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, null, prices, null, isHotDish(item.name), item.gf);
+        const menuItem = createMenuItem(item.name, null, prices, null, isHotDish(item.name), item);
         container.appendChild(menuItem);
     });
 }
@@ -415,7 +416,7 @@ function populateAppetizers() {
     const menuItems = menuData.appetizers.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, false, item.gf);
+        const menuItem = createMenuItem(item.name, item.description, prices, null, false, item);
         container.appendChild(menuItem);
     });
 }
@@ -430,7 +431,7 @@ function populateSoups() {
     const menuItems = menuData.soups.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
+        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item);
         container.appendChild(menuItem);
     });
 }
@@ -444,7 +445,7 @@ function populateSpecialties() {
     const menuItems = menuData.chef_s_specialties.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
+        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item);
         container.appendChild(menuItem);
     });
 }
@@ -459,7 +460,7 @@ function populateWeightWatchers() {
     const menuItems = menuData.weight_watchers_menu.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
+        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item);
         container.appendChild(menuItem);
     });
 }
@@ -474,7 +475,7 @@ function populateChickenDishes() {
     const menuItems = menuData.chicken.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
+        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item);
         container.appendChild(menuItem);
     });
 }
@@ -489,7 +490,7 @@ function populatePorkDishes() {
     const menuItems = menuData.pork.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
+        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item);
         container.appendChild(menuItem);
     });
 }
@@ -504,7 +505,7 @@ function populateBeefDishes() {
     const menuItems = menuData.beef.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
+        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item);
         container.appendChild(menuItem);
     });
 }
@@ -519,7 +520,7 @@ function populateSeafoodDishes() {
     const menuItems = menuData.seafood.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
+        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item);
         container.appendChild(menuItem);
     });
 }
@@ -534,7 +535,7 @@ function populateVegetableDishes() {
     const menuItems = menuData.vegetables.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
+        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item);
         container.appendChild(menuItem);
     });
 }
@@ -549,7 +550,7 @@ function populateLoMeinNoodles() {
     const note = menuData.lo_mein_noodles.find(item => item.note)?.note;
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, null, prices, note, false, item.gf);
+        const menuItem = createMenuItem(item.name, null, prices, note, false, item);
         container.appendChild(menuItem);
     });
 }
@@ -563,7 +564,7 @@ function populateSubgum() {
     const menuItems = menuData.subgum.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
+        const menuItem = createMenuItem(item.name, null, prices, null, false, item);
         container.appendChild(menuItem);
     });
 }
@@ -578,7 +579,7 @@ function populateChowMeinChopSuey() {
     const note = menuData.chow_mein_chop_suey.find(item => item.note)?.note;
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, null, prices, note, false, item.gf);
+        const menuItem = createMenuItem(item.name, null, prices, note, false, item);
         container.appendChild(menuItem);
     });
 }
@@ -592,7 +593,7 @@ function populateEasternNoodles() {
     const menuItems = menuData.eastern_popular_noodles_dishes.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item.gf);
+        const menuItem = createMenuItem(item.name, item.description, prices, null, isHotDish(item.name), item);
         container.appendChild(menuItem);
     });
 }
@@ -606,7 +607,7 @@ function populateFriedRice() {
     const menuItems = menuData.fried_rice.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
+        const menuItem = createMenuItem(item.name, null, prices, null, false, item);
         container.appendChild(menuItem);
     });
 }
@@ -620,7 +621,7 @@ function populateEggFooYoung() {
     const menuItems = menuData.egg_foo_young.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
+        const menuItem = createMenuItem(item.name, null, prices, null, false, item);
         container.appendChild(menuItem);
     });
 }
@@ -634,7 +635,7 @@ function populateDrinks() {
     const menuItems = menuData.drinks.filter(item => item.name);
     menuItems.forEach(item => {
         const prices = getPrice(item);
-        const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
+        const menuItem = createMenuItem(item.name, null, prices, null, false, item);
         container.appendChild(menuItem);
     });
 }
@@ -650,7 +651,7 @@ function populateSidesExtras() {
         const menuItems = menuData.side_orders.filter(item => item.name);
         menuItems.forEach(item => {
             const prices = getPrice(item);
-            const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
+            const menuItem = createMenuItem(item.name, null, prices, null, false, item);
             sideOrdersContainer.appendChild(menuItem);
         });
     }
@@ -662,7 +663,7 @@ function populateSidesExtras() {
         const menuItems = menuData.extra.filter(item => item.name);
         menuItems.forEach(item => {
             const prices = getPrice(item);
-            const menuItem = createMenuItem(item.name, null, prices, null, false, item.gf);
+            const menuItem = createMenuItem(item.name, null, prices, null, false, item);
             extraContainer.appendChild(menuItem);
         });
     }
@@ -683,11 +684,14 @@ function getPrice(item) {
     }
 }
 
-// Helper function to create menu item HTML
-function createMenuItem(name, description, price, note, isHot, isGlutenFree = false) {
+// Helper function to create menu item HTML.
+// `item` is the raw menu entry, which carries the gf flag and any dish photo.
+function createMenuItem(name, description, price, note, isHot, item = {}) {
+    const isGlutenFree = item.gf;
+
     const div = document.createElement('div');
     div.className = 'menu-item';
-    
+
     // Build left-side icon elements (separate from the text)
     const leftWrap = document.createElement('div');
     leftWrap.className = 'menu-item-left';
@@ -700,13 +704,19 @@ function createMenuItem(name, description, price, note, isHot, isGlutenFree = fa
         const hotEl = document.createElement('span');
         hotEl.className = 'menu-item-icon hot-icon';
         hotEl.textContent = '🌶️';
+        // Give screen readers a clear word instead of the raw emoji name
+        hotEl.setAttribute('role', 'img');
+        hotEl.setAttribute('aria-label', 'Spicy');
         iconsWrap.appendChild(hotEl);
     }
-    
+
     if (isGlutenFree) {
         const gfEl = document.createElement('span');
         gfEl.className = 'gf-indicator';
         gfEl.textContent = 'GF';
+        // Announce "Gluten free" instead of the letters "G F"
+        gfEl.setAttribute('role', 'img');
+        gfEl.setAttribute('aria-label', 'Gluten free');
         iconsWrap.appendChild(gfEl);
     }
     
@@ -723,7 +733,19 @@ function createMenuItem(name, description, price, note, isHot, isGlutenFree = fa
     }
     nameEl.textContent = name;
     nameWrap.appendChild(nameEl);
-    
+
+    // Items with a photo get a camera cue and become clickable
+    if (item.image) {
+        div.classList.add('has-photo');
+
+        const photoBtn = document.createElement('button');
+        photoBtn.type = 'button';
+        photoBtn.className = 'photo-cue';
+        photoBtn.setAttribute('aria-label', `See a photo of ${name}`);
+        photoBtn.innerHTML = '<i class="fas fa-camera" aria-hidden="true"></i><span>Photo</span>';
+        nameWrap.appendChild(photoBtn);
+    }
+
     leftWrap.appendChild(nameWrap);
     
     // Price HTML
@@ -750,7 +772,14 @@ function createMenuItem(name, description, price, note, isHot, isGlutenFree = fa
     div.appendChild(header);
     if (description) div.insertAdjacentHTML('beforeend', `<p class="menu-item-description">${description}</p>`);
     if (note) div.insertAdjacentHTML('beforeend', `<p class="menu-item-note">${note}</p>`);
-    
+
+    // One handler on the row covers both the tap and the button's keyboard activation
+    if (item.image) {
+        div.addEventListener('click', function () {
+            openPhotoModal(item, name, priceWrapper.textContent);
+        });
+    }
+
     return div;
 }
 
@@ -827,6 +856,111 @@ function showMenuError() {
     if (navContainer) {
         navContainer.innerHTML = '<div style="text-align: center; padding: 1rem; color: var(--primary-red);">Error loading navigation.</div>';
     }
+}
+
+// Dish photo viewer
+
+// Map a full-size dish photo path (e.g. "images/sesame_chicken.JPG") to the
+// optimized responsive variants produced by optimize-images.py. The browser
+// then downloads only the size it needs — a small file on phones, a larger one
+// on high-DPI desktops.
+function buildImageVariants(imagePath) {
+    const match = typeof imagePath === 'string'
+        && imagePath.match(/^(?:.*\/)?([^\/]+)\.[^.\/]+$/);
+    if (!match) return null;
+    const base = `images/optimized/${match[1]}`;
+    return {
+        srcset: `${base}-960.jpg 960w, ${base}-1440.jpg 1440w`,
+        // The modal image never renders wider than the 736px panel; below 600px
+        // it fills nearly the whole viewport.
+        sizes: '(max-width: 600px) 96vw, 736px',
+        fallback: `${base}-1440.jpg`,
+    };
+}
+
+let photoModalLastFocus = null;
+// Bumped on every open so a slow-decoding image can't reveal itself after the
+// user has already moved on to a different dish.
+let photoModalLoadToken = 0;
+
+function openPhotoModal(item, name, priceText) {
+    const modal = document.getElementById('photoModal');
+    const image = document.getElementById('photoModalImage');
+    if (!modal || !image) return;
+
+    photoModalLastFocus = document.activeElement;
+
+    // Start hidden so the previously viewed photo can't flash while the new file
+    // downloads and decodes. The caption updates immediately, so only the image waits.
+    image.classList.remove('is-loaded');
+    image.alt = item.image_alt || name;
+    document.getElementById('photoModalTitle').textContent = name;
+    document.getElementById('photoModalPrice').textContent = priceText || '';
+
+    modal.hidden = false;
+    document.body.classList.add('photo-modal-open');
+    document.getElementById('photoModalClose').focus();
+
+    // Setting src/srcset here is what triggers the download — nothing loads until
+    // asked for. Reveal the image only once it's actually ready to paint.
+    const token = ++photoModalLoadToken;
+    const reveal = () => {
+        if (token === photoModalLoadToken) image.classList.add('is-loaded');
+    };
+    const variants = buildImageVariants(item.image);
+    if (variants) {
+        image.sizes = variants.sizes;
+        image.srcset = variants.srcset;
+        image.src = variants.fallback;
+    } else {
+        image.removeAttribute('srcset');
+        image.src = item.image;
+    }
+    if (typeof image.decode === 'function') {
+        image.decode().then(reveal).catch(reveal);
+    } else {
+        image.onload = reveal;
+    }
+}
+
+function closePhotoModal() {
+    const modal = document.getElementById('photoModal');
+    const image = document.getElementById('photoModalImage');
+    if (!modal || modal.hidden) return;
+
+    modal.hidden = true;
+    document.body.classList.remove('photo-modal-open');
+
+    // Drop the current image so it can't flash the next time the modal opens, and
+    // so the browser can release its decoded bitmap.
+    if (image) {
+        image.classList.remove('is-loaded');
+        image.removeAttribute('src');
+        image.removeAttribute('srcset');
+    }
+
+    // Send focus back where it came from so keyboard users don't lose their place
+    if (photoModalLastFocus) {
+        photoModalLastFocus.focus();
+        photoModalLastFocus = null;
+    }
+}
+
+function setupPhotoModal() {
+    const modal = document.getElementById('photoModal');
+    const closeBtn = document.getElementById('photoModalClose');
+    if (!modal || !closeBtn) return;
+
+    closeBtn.addEventListener('click', closePhotoModal);
+
+    // Clicking the backdrop (but not the panel itself) dismisses it
+    modal.addEventListener('click', function (e) {
+        if (e.target === modal) closePhotoModal();
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closePhotoModal();
+    });
 }
 
 // Back to Top Button Functionality

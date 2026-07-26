@@ -1,0 +1,45 @@
+# ---- OS junk ----
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ---- Python (optimize-images.py tooling) ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+ENV/
+
+# ---- Node (only if you add tooling later) ----
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# ---- Editors / IDEs ----
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ---- Local env / secrets ----
+.env
+.env.local
+*.local
+
+# ---- Claude Code (keep shared config, ignore per-machine settings) ----
+.claude/settings.local.json
+
+# ---- Notes ----
+# The site's content is intentionally tracked: index.html, styles.css, script.js,
+# china_cafe_menu.json, and everything under images/ (including images/optimized/).
+# Do NOT add images/ here — those photos are part of the deployed site.
