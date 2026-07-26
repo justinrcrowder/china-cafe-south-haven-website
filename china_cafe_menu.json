@@ -33,9 +33,7 @@
     },
     {
       "name": "Kung Bao Chicken (Hot!)",
-      "price": 11.75,
-      "image": "images/kung_bao_chicken.JPG",
-      "image_alt": "Kung bao chicken: tender chicken pieces with vegetables and peanuts in a spicy sauce"
+      "price": 11.75
     },
     {
       "name": "Szechwan Chicken (Hot!)",
@@ -335,7 +333,9 @@
     {
       "name": "Kung Bao Chicken (Hot!)",
       "small_price": 10.50,
-      "large_price": 13.50
+      "large_price": 13.50,
+      "image": "images/kung_bao_chicken.JPG",
+      "image_alt": "Kung bao chicken: tender chicken pieces with vegetables and peanuts in a spicy sauce"
     },
     {
       "name": "Hunan Chicken (Hot!)",
