@@ -33,7 +33,9 @@
     },
     {
       "name": "Kung Bao Chicken (Hot!)",
-      "price": 11.75
+      "price": 11.75,
+      "image": "images/kung_bao_chicken.JPG",
+      "image_alt": "Kung bao chicken: tender chicken pieces with vegetables and peanuts in a spicy sauce"
     },
     {
       "name": "Szechwan Chicken (Hot!)",
@@ -93,7 +95,9 @@
     },
     {
       "name": "Governor or Orange Chicken (Hot!)",
-      "price": 12.75
+      "price": 12.75,
+      "image": "images/governors_chicken.JPG",
+      "image_alt": "Governor's chicken: tender chicken pieces with bell peppers in a tangy brown sauce"
     },
     {
       "name": "Sesame Chicken",
@@ -128,7 +132,9 @@
   "appetizers": [
     {
       "name": "Egg Roll (1) or Vegetable Egg Roll (1)",
-      "price": 1.90
+      "price": 1.90,
+      "image": "images/egg_rolls.JPG",
+      "image_alt": "Egg rolls: crispy fried rolls filled with vegetables and meat"
     },
     {
         "name": "Bobo Combination Appetizers (For 2)",
@@ -141,15 +147,21 @@
     },
     {
       "name": "Crab Meat Rangoon (8)",
-      "price": 7.50
+      "price": 7.50,
+      "image": "images/crab_meat_rangoons.JPG",
+      "image_alt": "Crab meat rangoon: crispy wonton wrappers filled with cream cheese and crab meat, served with sweet and sour sauce"
     },
     {
         "name":"Barbecue Pork",
-        "price": 7.95
+        "price": 7.95,
+        "image": "images/bbq_pork_appetizer.JPG",
+        "image_alt": "Barbecue pork: tender pork pieces glazed with a sweet and savory sauce"
     },
     {
       "name": "Teriyaki Beef (4)",
-      "price": 7.95
+      "price": 7.95,
+      "image": "images/teriyaki_beef_appetizer.JPG",
+      "image_alt": "Teriyaki beef: tender beef pieces glazed with a sweet and savory sauce"
     },
     {
       "name": "Fried Crab Stick (6)",
@@ -157,7 +169,9 @@
     },
     {
       "name": "Pot Stickers (4)",
-      "price": 5.50
+      "price": 5.50,
+      "image": "images/pot_stickers.JPG",
+      "image_alt": "Pot stickers: pan-fried dumplings filled with meat and vegetables"
     },
     {
       "name": "Fried Wonton (12)",
@@ -165,11 +179,15 @@
     },
     {
       "name": "Chicken on Stick (4)",
-      "price": 6.25
+      "price": 6.25,
+      "image": "images/chicken_on_a_stick_appetizer.JPG",
+      "image_alt": "Chicken on stick: tender chicken pieces skewered and fried"
     },
     {
       "name": "Sugar Donuts (10)",
-      "price": 5.25
+      "price": 5.25,
+      "image": "images/sugar_donuts.JPG",
+      "image_alt": "Sugar donuts: crispy fried dough coated in sugar"
     },
     {
       "name": "Spring Rolls (3)",
@@ -189,7 +207,9 @@
     {
       "name": "Hot & Sour Soup (Hot!)",
       "small_price": 4.25,
-      "large_price": 8.50
+      "large_price": 8.50,
+      "image": "images/hot_and_sour_soup.JPG",
+      "image_alt": "Hot and sour soup: a spicy and tangy brown soup with mushrooms"
     },
     {
       "name": "Wonton Soup",
@@ -219,8 +239,10 @@
     {"note": "served with rice"},
     {
     "name": "Happy Family",
-    "description": "A combination of tender beef, shrimp, pork, chicken and Chinese vegetables stir fried in our special brown sauce and white sauce.",
-    "price": 16.95
+    "description": "A combination of tender beef, shrimp, pork, chicken and Chinese vegetables stir fried in our special brown sauce.",
+    "price": 16.95,
+    "image": "images/happy_family.JPG",
+    "image_alt": "Happy family: tender beef, shrimp, pork, chicken and Chinese vegetables stir fried in a special brown sauce"
     },
     {
       "name": "Triple Delights (Hot!)",
@@ -241,7 +263,9 @@
     {
       "name": "Sesame Chicken",
       "price": 14.50,
-      "description": "A proven winner, honey glazed chunked chicken is cooked to perfection with sesame seeds."
+      "description": "A proven winner, honey glazed chunked chicken is cooked to perfection with sesame seeds.",
+      "image": "images/sesame_chicken.JPG",
+      "image_alt": "Sesame chicken: honey glazed chicken pieces topped with sesame seeds"
     },
     {
       "name": "Governor's Chicken (Hot!)",
@@ -291,7 +315,9 @@
       "name": "Chicken Mixed Vegetables",
       "small_price": 10.50,
       "large_price": 13.50,
-      "gf": true
+      "gf": true,
+      "image": "images/chicken_mixed_vegetables.JPG",
+      "image_alt": "Chicken mixed vegetables: tender chicken pieces with vegetables"
     },
     {
       "name": "Sweet & Sour Chicken",
@@ -302,7 +328,9 @@
       "name": "Mushroom Chicken",
       "small_price": 10.50,
       "large_price": 13.50,
-      "gf": true
+      "gf": true,
+      "image": "images/mushroom_chicken.JPG",
+      "image_alt": "Mushroom chicken: tender chicken pieces with mushrooms in a savory sauce"
     },
     {
       "name": "Kung Bao Chicken (Hot!)",
@@ -317,17 +345,23 @@
     {
       "name": "Empress Chicken (Hot!)",
       "small_price": 11.50,
-      "large_price": 14.50
+      "large_price": 14.50,
+      "image": "images/empress_chicken.JPG",
+      "image_alt": "Empress chicken: tender chicken pieces with vegetables in a spicy sauce"
     },
     {
       "name": "Szechwan Chicken (Hot!)",
       "small_price": 10.50,
-      "large_price": 13.50
+      "large_price": 13.50,
+      "image": "images/szechwan_chicken.JPG",
+      "image_alt": "Szechwan chicken: tender chicken pieces with vegetables in a spicy sauce"
     },
     {
       "name": "Cashew Chicken",
       "small_price": 10.50,
-      "large_price": 13.50
+      "large_price": 13.50,
+      "image": "images/cashew_chicken.JPG",
+      "image_alt": "Cashew chicken: tender chicken pieces with vegetables and cashews in a savory sauce"
     },
     {
       "name": "Chicken with Peapods",
@@ -339,7 +373,9 @@
       "name": "Chicken Broccoli",
       "small_price": 10.50,
       "large_price": 13.50,
-      "gf": true
+      "gf": true,
+      "image": "images/chicken_broccoli.JPG",
+      "image_alt": "Chicken broccoli: tender chicken pieces with broccoli"
     },
     {
       "name": "Sesame Almond Chicken",
@@ -379,7 +415,9 @@
     {
       "name": "Garlic Chicken (Hot!)",
       "small_price": 10.50,
-      "large_price": 13.50
+      "large_price": 13.50,
+      "image": "images/garlic_chicken.JPG",
+      "image_alt": "Garlic chicken: tender chicken pieces with vegetables in a garlic sauce"
     },
     {
       "name": "Pepper Chicken",
@@ -392,7 +430,9 @@
     {
       "name": "Moo Shu Pork",
       "description": "Served with pancakes",
-      "large_price": 14.50
+      "large_price": 14.50,
+      "image": "images/mooshu_pork.JPG",
+      "image_alt": "Moo shu pork: tender pork pieces with vegetables served with pancakes"
     },
     {
       "name": "Sweet & Sour Pork",
@@ -415,8 +455,8 @@
       "large_price": 13.50
     },
     {
-        "name": "Garlic Pork (Hot!)",
-        "small_price": 10.50,
+      "name": "Garlic Pork (Hot!)",
+      "small_price": 10.50,
       "large_price": 13.50
     }
   ],
@@ -460,7 +500,9 @@
     {
       "name": "Beef Broccoli",
       "small_price": 11.50,
-      "large_price": 14.50
+      "large_price": 14.50,
+      "image": "images/beef_broccoli.JPG",
+      "image_alt": "Beef broccoli: tender beef pieces with broccoli"
     },
     {
       "name": "Pepper Tomato Beef",
@@ -480,7 +522,9 @@
     {
       "name": "Pepper Beef",
       "small_price": 11.50,
-      "large_price": 14.50
+      "large_price": 14.50,
+      "image": "images/pepper_beef.JPG",
+      "image_alt": "Pepper beef: tender beef pieces with bell peppers in a savory sauce"
     },
     {
         "name": "Curry Beef",
@@ -671,7 +715,9 @@
     {
       "name": "Egg Foo Young (Choice of chicken, BBQ pork, or vegetables)",
       "small_price": 10.50,
-      "large_price": 13.50
+      "large_price": 13.50,
+      "image": "images/egg_foo_young.JPG",
+      "image_alt": "Egg foo young: fluffy omelette covered in sauce"
     },
     {
       "name": "Shrimp or Beef Egg Foo Young",
@@ -683,7 +729,9 @@
     {
       "name": "Fried Rice (Choice of chicken, BBQ pork, or vegetables)",
       "small_price": 8.50,
-      "large_price": 11.50
+      "large_price": 11.50,
+      "image": "images/chicken_fried_rice.JPG",
+      "image_alt": "Chicken fried rice: tender chicken pieces with vegetables and rice"
     },
     {
       "name": "Shrimp or Beef Fried Rice",
@@ -713,7 +761,9 @@
     {
       "name": "Shrimp or Beef Low Mein",
       "small_price": 11.50,
-      "large_price": 14.50
+      "large_price": 14.50,
+      "image": "images/beef_low_mein.JPG",
+      "image_alt": "Beef low mein: tender beef pieces with vegetables and soft noodles"
     },
     {
       "name": "Triple Low Mein (Chicken, Shrimp, & BBQ Pork)",
@@ -747,7 +797,9 @@
     {
       "name": "Shrimp or Beef Chop Suey or Chow-Mein",
       "small_price": 11.50,
-      "large_price": 14.50
+      "large_price": 14.50,
+      "image": "images/beef_chop_suey.JPG",
+      "image_alt": "Beef chop suey: tender beef pieces with vegetables and noodles in a savory sauce"
     },
     {
       "name": "Triple Chop Suey or Chow-Mein (Chicken, Shrimp, & BBQ Pork)",
@@ -758,12 +810,16 @@
     {
       "name": "Singapore Fried Noodle",
       "description": "Rice noodle with BBQ pork, shrimp, onion, egg, and bean sprout with curry",
-      "price": 15.95
+      "price": 15.95,
+      "image": "images/singapore_fried_noodles.JPG",
+      "image_alt": "Singapore fried noodles: rice noodles with BBQ pork, shrimp, onion, egg, and bean sprout with curry"
     },
     {
       "name": "Korean Combo Bowl (Hot!)",
       "description": "Big wheat noodles with chicken, beef, shrimp, mushrooms, bamboo shoots, and Asian greens in a special hot broth.",
-      "price": 15.95
+      "price": 15.95,
+      "image": "images/korean_combo_bowl.JPG",
+      "image_alt": "Korean combo bowl: big wheat noodles with chicken, beef, shrimp, mushrooms, bamboo shoots, and Asian greens in a special hot broth"
     },
     {
       "name": "Pad Thai (Choice of Chicken, Pork, or Tofu)",
@@ -772,7 +828,9 @@
     {
       "name": "Shrimp or Beef Pad Thai",
       "description": "Stir fried thin rice noodles, choice of meat, bean sprouts, onions, scrambled eggs & crushed peanuts in sweet & sour tamarind sauce.",
-      "price": 18.95
+      "price": 18.95,
+      "image": "images/beef_pad_thai.JPG",
+      "image_alt": "Beef pad thai: stir fried thin rice noodles with tender beef pieces, bean sprouts, onions, scrambled eggs, and crushed peanuts in sweet and sour tamarind sauce"
     }
   ],
   "side_orders": [
@@ -786,7 +844,9 @@
     },
     {
       "name": "Pan Fried Noodles",
-      "price": 4.50
+      "price": 4.50,
+      "image": "images/pan_fried_noodles_lg.JPG",
+      "image_alt": "Pan fried noodles: large portion of crispy fried noodles"
     },
     {
       "name": "Almond Cookies (5)",
